@@ -9,14 +9,26 @@ export interface AITechnologyVisualizationProps {
   showLabels?: boolean;
 }
 
-// Node types for AI visualization
+// Node types for AI visualization with premium colors
 const nodeTypes = [
-  { id: 'ml', label: 'Machine Learning', color: 'from-blue-500 to-blue-600' },
-  { id: 'nlp', label: 'NLP', color: 'from-green-500 to-green-600' },
-  { id: 'cv', label: 'Computer Vision', color: 'from-purple-500 to-purple-600' },
-  { id: 'data', label: 'Data Analytics', color: 'from-orange-500 to-orange-600' },
-  { id: 'ai', label: 'AI Core', color: 'from-slate-600 to-slate-700' },
-  { id: 'automation', label: 'Automation', color: 'from-cyan-500 to-cyan-600' },
+  {
+    id: 'ml',
+    label: 'Machine Learning',
+    color: 'from-indigo-600 to-purple-700',
+  },
+  { id: 'nlp', label: 'NLP', color: 'from-emerald-600 to-teal-700' },
+  {
+    id: 'cv',
+    label: 'Computer Vision',
+    color: 'from-violet-600 to-purple-700',
+  },
+  {
+    id: 'data',
+    label: 'Data Analytics',
+    color: 'from-amber-600 to-orange-700',
+  },
+  { id: 'ai', label: 'AI Core', color: 'from-slate-700 to-gray-800' },
+  { id: 'automation', label: 'Automation', color: 'from-cyan-600 to-blue-700' },
 ];
 
 // Connection paths between nodes
@@ -32,7 +44,7 @@ const connections = [
 export function AITechnologyVisualization({
   className,
   variant = 'hero',
-  showLabels = true
+  showLabels = true,
 }: AITechnologyVisualizationProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeNodes, setActiveNodes] = useState<string[]>([]);
@@ -90,11 +102,12 @@ export function AITechnologyVisualization({
     const centerY = 50;
     const radius = variant === 'compact' ? 25 : 35;
 
-    if (index === 4) { // AI Core - center position
+    if (index === 4) {
+      // AI Core - center position
       return { x: centerX, y: centerY };
     }
 
-    const angle = (index * 60) + (pulsePhase * 5); // Subtle rotation
+    const angle = index * 60 + pulsePhase * 5; // Subtle rotation
     const x = centerX + Math.cos((angle * Math.PI) / 180) * radius;
     const y = centerY + Math.sin((angle * Math.PI) / 180) * radius;
 
@@ -102,9 +115,15 @@ export function AITechnologyVisualization({
   };
 
   return (
-    <div className={cn('relative flex items-center justify-center', getVariantClasses(), className)}>
+    <div
+      className={cn(
+        'relative flex items-center justify-center',
+        getVariantClasses(),
+        className
+      )}
+    >
       <svg
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 h-full w-full"
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -119,7 +138,9 @@ export function AITechnologyVisualization({
           const fromPos = getNodePosition(fromIndex);
           const toPos = getNodePosition(toIndex);
 
-          const isActive = activeNodes.includes(connection.from) && activeNodes.includes(connection.to);
+          const isActive =
+            activeNodes.includes(connection.from) &&
+            activeNodes.includes(connection.to);
 
           return (
             <line
@@ -129,14 +150,14 @@ export function AITechnologyVisualization({
               x2={toPos.x}
               y2={toPos.y}
               stroke={isActive ? '#3b82f6' : '#e2e8f0'}
-              strokeWidth={isActive ? (connection.strength * 0.5) : 0.2}
+              strokeWidth={isActive ? connection.strength * 0.5 : 0.2}
               className={cn(
                 'transition-all duration-500',
                 isActive && 'drop-shadow-sm'
               )}
               style={{
                 opacity: isActive ? connection.strength : 0.3,
-                transitionDelay: `${index * 0.1}s`
+                transitionDelay: `${index * 0.1}s`,
               }}
             />
           );
@@ -153,7 +174,9 @@ export function AITechnologyVisualization({
           const fromPos = getNodePosition(fromIndex);
           const toPos = getNodePosition(toIndex);
 
-          const isActive = activeNodes.includes(connection.from) && activeNodes.includes(connection.to);
+          const isActive =
+            activeNodes.includes(connection.from) &&
+            activeNodes.includes(connection.to);
 
           return (
             <circle
@@ -211,9 +234,9 @@ export function AITechnologyVisualization({
           <div
             key={node.id}
             className={cn(
-              'absolute flex items-center justify-center rounded-full transition-all duration-500 transform',
+              'absolute flex transform items-center justify-center rounded-full transition-all duration-500',
               getNodeSize(),
-              isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50',
+              isActive ? 'scale-100 opacity-100' : 'scale-50 opacity-0',
               isPulsing && isActive && 'scale-110 shadow-lg',
               isCenterNode && 'z-10'
             )}
@@ -221,29 +244,46 @@ export function AITechnologyVisualization({
               left: `${position.x}%`,
               top: `${position.y}%`,
               transform: `translate(-50%, -50%) ${isPulsing && isActive ? 'scale(1.1)' : 'scale(1)'}`,
-              transitionDelay: `${index * 0.1}s`
+              transitionDelay: `${index * 0.1}s`,
             }}
           >
             {/* Node Background */}
-            <div className={cn(
-              'absolute inset-0 rounded-full bg-gradient-to-br transition-all duration-300',
-              node.color,
-              isActive && 'shadow-lg',
-              isCenterNode && 'shadow-xl'
-            )} />
+            <div
+              className={cn(
+                'absolute inset-0 rounded-full bg-gradient-to-br transition-all duration-300',
+                node.color,
+                isActive && 'shadow-lg',
+                isCenterNode && 'shadow-xl'
+              )}
+            />
 
             {/* Node Content */}
             <div className="relative z-10 flex items-center justify-center text-white">
               {isCenterNode ? (
-                <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                <svg
+                  className="h-6 w-6 lg:h-8 lg:w-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  />
                 </svg>
               ) : (
-                <div className={cn(
-                  'font-bold leading-none text-center select-none',
-                  variant === 'compact' ? 'text-[6px]' : variant === 'background' ? 'text-[4px]' : 'text-xs lg:text-sm'
-                )}>
+                <div
+                  className={cn(
+                    'text-center leading-none font-bold select-none',
+                    variant === 'compact'
+                      ? 'text-[6px]'
+                      : variant === 'background'
+                        ? 'text-[4px]'
+                        : 'text-xs lg:text-sm'
+                  )}
+                >
                   {node.id === 'ml' && 'ML'}
                   {node.id === 'nlp' && 'NLP'}
                   {node.id === 'cv' && 'CV'}
@@ -255,11 +295,15 @@ export function AITechnologyVisualization({
 
             {/* Node Label */}
             {showLabels && variant === 'hero' && (
-              <div className={cn(
-                'absolute top-full mt-2 left-1/2 transform -translate-x-1/2 transition-all duration-500',
-                isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-              )}>
-                <div className="bg-white px-2 py-1 rounded shadow-sm border text-xs font-medium text-slate-700 whitespace-nowrap">
+              <div
+                className={cn(
+                  'absolute top-full left-1/2 mt-2 -translate-x-1/2 transform transition-all duration-500',
+                  isActive
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-2 opacity-0'
+                )}
+              >
+                <div className="rounded border bg-white px-2 py-1 text-xs font-medium whitespace-nowrap text-slate-700 shadow-sm">
                   {node.label}
                 </div>
               </div>
@@ -269,15 +313,20 @@ export function AITechnologyVisualization({
       })}
 
       {/* Center Pulse Effect */}
-      <div className={cn(
-        'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000',
-        isAnimating && activeNodes.length > 4 ? 'animate-ping opacity-20' : 'opacity-0',
-        variant === 'compact' ? 'w-16 h-16' : 'w-24 h-24'
-      )}
-      style={{
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
-        animationDuration: '3s'
-      }} />
+      <div
+        className={cn(
+          'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-full transition-all duration-1000',
+          isAnimating && activeNodes.length > 4
+            ? 'animate-ping opacity-20'
+            : 'opacity-0',
+          variant === 'compact' ? 'h-16 w-16' : 'h-24 w-24'
+        )}
+        style={{
+          background:
+            'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+          animationDuration: '3s',
+        }}
+      />
     </div>
   );
 }

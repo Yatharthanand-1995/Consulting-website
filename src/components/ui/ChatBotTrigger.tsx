@@ -38,72 +38,84 @@ export function ChatBotTrigger({ className }: ChatBotTriggerProps) {
       {/* Floating Trigger Button */}
       <div
         className={cn(
-          'fixed bottom-6 right-6 z-40 transition-all duration-500 transform',
+          'fixed right-6 bottom-6 z-40 transform transition-all duration-500',
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0',
-          isOpen && 'translate-y-20 opacity-0 pointer-events-none',
+          isOpen && 'pointer-events-none translate-y-20 opacity-0',
           className
         )}
       >
         <button
           onClick={handleOpen}
           className={cn(
-            'relative w-20 h-20 bg-gradient-neon rounded-3xl shadow-neural border-2 border-neon-cyan/30',
+            'bg-gradient-neon shadow-neural border-neon-cyan/30 relative h-20 w-20 rounded-3xl border-2',
             'flex items-center justify-center',
             'animate-float-3d hover-neural',
-            'transition-all duration-500 transform hover:scale-115 hover:rotate-3',
+            'transform transition-all duration-500 hover:scale-115 hover:rotate-3',
             'group backdrop-blur-sm'
           )}
         >
           {/* Multiple Pulsing Rings */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-neon opacity-30 animate-ping" />
-          <div className="absolute inset-2 rounded-2xl bg-gradient-cyber opacity-20 animate-ping" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute inset-4 rounded-xl bg-gradient-neural opacity-15 animate-ping" style={{ animationDelay: '1s' }} />
+          <div className="bg-gradient-neon absolute inset-0 animate-ping rounded-3xl opacity-30" />
+          <div
+            className="bg-gradient-cyber absolute inset-2 animate-ping rounded-2xl opacity-20"
+            style={{ animationDelay: '0.5s' }}
+          />
+          <div
+            className="bg-gradient-neural absolute inset-4 animate-ping rounded-xl opacity-15"
+            style={{ animationDelay: '1s' }}
+          />
 
           {/* Enhanced Main Icon */}
-          <div className="relative text-3xl animate-hologram z-10">
-            🤖
-          </div>
+          <div className="animate-hologram relative z-10 text-3xl">🤖</div>
 
           {/* Orbiting Elements */}
-          <div className="absolute inset-0 animate-spin" style={{ animationDuration: '10s' }}>
-            <div className="absolute top-1 left-1/2 w-2 h-2 bg-neon-cyan rounded-full transform -translate-x-1/2" />
-            <div className="absolute bottom-1 left-1/2 w-2 h-2 bg-neon-purple rounded-full transform -translate-x-1/2" />
+          <div
+            className="absolute inset-0 animate-spin"
+            style={{ animationDuration: '10s' }}
+          >
+            <div className="bg-neon-cyan absolute top-1 left-1/2 h-2 w-2 -translate-x-1/2 transform rounded-full" />
+            <div className="bg-neon-purple absolute bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 transform rounded-full" />
           </div>
 
           {/* Enhanced New Message Indicator */}
           {hasNewMessage && (
-            <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-matrix rounded-2xl flex items-center justify-center animate-neon-pulse border-2 border-matrix shadow-neon-green">
-              <span className="text-sm text-primary font-black">!</span>
+            <div className="bg-gradient-matrix animate-neon-pulse border-matrix shadow-neon-green absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-2xl border-2">
+              <span className="text-primary text-sm font-black">!</span>
             </div>
           )}
 
           {/* Enhanced Tooltip */}
-          <div className={cn(
-            'absolute right-full mr-6 top-1/2 -translate-y-1/2',
-            'bg-gradient-dark border-2 border-neon-cyan/30 rounded-2xl px-4 py-3 shadow-neural backdrop-blur-md',
-            'opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-95 group-hover:scale-100',
-            'pointer-events-none whitespace-nowrap'
-          )}>
-            <p className="text-sm text-neon font-medium">
-              <span className="text-matrix">🚀</span> Hi! I'm your AI consultant
+          <div
+            className={cn(
+              'absolute top-1/2 right-full mr-6 -translate-y-1/2',
+              'bg-gradient-dark border-neon-cyan/30 shadow-neural rounded-2xl border-2 px-4 py-3 backdrop-blur-md',
+              'scale-95 transform opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100',
+              'pointer-events-none whitespace-nowrap'
+            )}
+          >
+            <p className="text-neon text-sm font-medium">
+              <span className="text-matrix">🚀</span> Hi! I&apos;m your AI
+              consultant
             </p>
-            <p className="text-xs text-neutral-300 font-medium">
+            <p className="text-xs font-medium text-neutral-300">
               Ask me about strategy, ROI, implementation...
             </p>
-            <div className="absolute left-full top-1/2 -translate-y-1/2 border-l-8 border-l-neon-cyan/30 border-y-6 border-y-transparent" />
+            <div className="border-l-neon-cyan/30 absolute top-1/2 left-full -translate-y-1/2 border-y-6 border-l-8 border-y-transparent" />
           </div>
         </button>
 
         {/* Enhanced Ambient Particles */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0">
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
               className={cn(
-                'absolute w-2 h-2 rounded-full animate-float-3d',
-                i % 3 === 0 ? 'bg-neon-cyan shadow-neon-cyan' :
-                i % 3 === 1 ? 'bg-neon-purple shadow-neon-purple' :
-                'bg-neon-green shadow-neon-green'
+                'animate-float-3d absolute h-2 w-2 rounded-full',
+                i % 3 === 0
+                  ? 'bg-neon-cyan shadow-neon-cyan'
+                  : i % 3 === 1
+                    ? 'bg-neon-purple shadow-neon-purple'
+                    : 'bg-neon-green shadow-neon-green'
               )}
               style={{
                 left: `${10 + Math.random() * 80}%`,
@@ -117,11 +129,11 @@ export function ChatBotTrigger({ className }: ChatBotTriggerProps) {
         </div>
 
         {/* Neural Network Lines */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="pointer-events-none absolute inset-0 opacity-20">
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="absolute bg-gradient-to-r from-transparent via-neon-cyan to-transparent h-px animate-cyber-flow"
+              className="via-neon-cyan animate-cyber-flow absolute h-px bg-gradient-to-r from-transparent to-transparent"
               style={{
                 left: '-50%',
                 right: '-50%',
@@ -135,10 +147,7 @@ export function ChatBotTrigger({ className }: ChatBotTriggerProps) {
       </div>
 
       {/* ChatBot Component */}
-      <ChatBot
-        isOpen={isOpen}
-        onClose={handleClose}
-      />
+      <ChatBot isOpen={isOpen} onClose={handleClose} />
     </>
   );
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Button, Badge } from '@/components/ui';
+import { Button, Badge, StratexLogo } from '@/components/ui';
 import { smoothScrollToElement, navigationSections } from '@/lib/smooth-scroll';
 import type { NavigationItem } from '@/types';
 
@@ -23,7 +23,11 @@ const mainNavigationTabs: NavigationItem[] = [
   { label: 'Contact Us', href: '/contact' },
 ];
 
-export function Header({ className, transparent = false, fixed = true }: HeaderProps) {
+export function Header({
+  className,
+  transparent = false,
+  fixed = true,
+}: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -110,57 +114,65 @@ export function Header({ className, transparent = false, fixed = true }: HeaderP
   return (
     <header
       className={cn(
-        'w-full z-50 transition-all duration-300',
-        fixed && 'fixed top-0 left-0 right-0',
+        'z-50 w-full transition-all duration-300',
+        fixed && 'fixed top-0 right-0 left-0',
         transparent && !isScrolled
           ? 'bg-transparent'
-          : 'bg-white/80 backdrop-blur-md border-b border-slate-200',
+          : 'border-b border-slate-200 bg-white/80 backdrop-blur-md',
         isScrolled && 'shadow-sm',
         className
       )}
     >
       <div className="container-professional">
-        <div className="flex-between" style={{ height: 'var(--layout-header)' }}>
+        <div
+          className="flex-between"
+          style={{ height: 'var(--layout-header)' }}
+        >
           {/* Logo */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <h1 className="text-xl font-semibold text-slate-800">
-                GenAI Consulting
-              </h1>
-              <div className="hidden sm:block h-6 w-px bg-slate-300"></div>
-              <p className="text-sm text-slate-600 hidden sm:block">
-                Fortune 500 AI Transformation
-              </p>
-            </div>
+          <div
+            className="flex items-center space-x-4"
+            onClick={() => handleNavClick('/')}
+          >
+            <StratexLogo
+              size="md"
+              variant="default"
+              animated={true}
+              showText={true}
+              className="cursor-pointer"
+            />
           </div>
 
           {/* Desktop Navigation - McKinsey Style Tabs */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {mainNavigationTabs.map((tab) => (
+          <nav className="hidden items-center space-x-8 lg:flex">
+            {mainNavigationTabs.map(tab => (
               <button
                 key={tab.href}
                 onClick={() => handleNavClick(tab.href)}
                 className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-all duration-300 group",
-                  pathname === tab.href || (tab.href === '/' && pathname === '/')
-                    ? "text-slate-900 border-b-2 border-secondary"
-                    : "text-slate-600 hover:text-slate-900 border-b-2 border-transparent hover:border-slate-300"
+                  'group relative px-4 py-2 text-sm font-medium transition-all duration-300',
+                  pathname === tab.href ||
+                    (tab.href === '/' && pathname === '/')
+                    ? 'border-secondary border-b-2 text-slate-900'
+                    : 'border-b-2 border-transparent text-slate-600 hover:border-slate-300 hover:text-slate-900'
                 )}
               >
                 {tab.label}
                 {/* Active indicator */}
-                <span className={cn(
-                  "absolute inset-x-0 -bottom-px h-0.5 bg-secondary transition-all duration-300",
-                  pathname === tab.href || (tab.href === '/' && pathname === '/')
-                    ? "opacity-100"
-                    : "opacity-0 group-hover:opacity-50"
-                )} />
+                <span
+                  className={cn(
+                    'bg-secondary absolute inset-x-0 -bottom-px h-0.5 transition-all duration-300',
+                    pathname === tab.href ||
+                      (tab.href === '/' && pathname === '/')
+                      ? 'opacity-100'
+                      : 'opacity-0 group-hover:opacity-50'
+                  )}
+                />
               </button>
             ))}
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex-professional">
+          <div className="lg:flex-professional hidden">
             <Badge variant="gradient" className="animate-neon-pulse">
               Live Demo
             </Badge>
@@ -173,30 +185,33 @@ export function Header({ className, transparent = false, fixed = true }: HeaderP
           </div>
 
           {/* Mobile Actions */}
-          <div className="lg:hidden flex-professional">
+          <div className="flex-professional lg:hidden">
             <button
               data-mobile-menu
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="component-button hover:bg-slate-100"
               aria-label="Toggle mobile menu"
             >
-              <div className="w-6 h-6 flex flex-col justify-center" style={{ gap: 'var(--space-1)' }}>
+              <div
+                className="flex h-6 w-6 flex-col justify-center"
+                style={{ gap: 'var(--space-1)' }}
+              >
                 <span
                   className={cn(
-                    'block h-0.5 bg-foreground transition-all duration-300 transform origin-center',
-                    isMobileMenuOpen && 'rotate-45 translate-y-1'
+                    'bg-foreground block h-0.5 origin-center transform transition-all duration-300',
+                    isMobileMenuOpen && 'translate-y-1 rotate-45'
                   )}
                 />
                 <span
                   className={cn(
-                    'block h-0.5 bg-foreground transition-all duration-300',
+                    'bg-foreground block h-0.5 transition-all duration-300',
                     isMobileMenuOpen && 'opacity-0'
                   )}
                 />
                 <span
                   className={cn(
-                    'block h-0.5 bg-foreground transition-all duration-300 transform origin-center',
-                    isMobileMenuOpen && '-rotate-45 -translate-y-1'
+                    'bg-foreground block h-0.5 origin-center transform transition-all duration-300',
+                    isMobileMenuOpen && '-translate-y-1 -rotate-45'
                   )}
                 />
               </div>
@@ -208,24 +223,25 @@ export function Header({ className, transparent = false, fixed = true }: HeaderP
         <div
           data-mobile-menu
           className={cn(
-            'lg:hidden absolute left-0 right-0 top-full bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-300 transform origin-top',
+            'absolute top-full right-0 left-0 origin-top transform border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-300 lg:hidden',
             isMobileMenuOpen
               ? 'scale-y-100 opacity-100'
-              : 'scale-y-0 opacity-0 pointer-events-none'
+              : 'pointer-events-none scale-y-0 opacity-0'
           )}
         >
           <div className="container-professional section-content">
             {/* Mobile Navigation - McKinsey Style */}
-            <nav className="space-y-2 mb-6">
-              {mainNavigationTabs.map((tab) => (
+            <nav className="mb-6 space-y-2">
+              {mainNavigationTabs.map(tab => (
                 <button
                   key={tab.href}
                   onClick={() => handleNavClick(tab.href)}
                   className={cn(
-                    "block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200",
-                    pathname === tab.href || (tab.href === '/' && pathname === '/')
-                      ? "bg-secondary text-white shadow-sm"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                    'block w-full rounded-lg px-4 py-3 text-left font-medium transition-all duration-200',
+                    pathname === tab.href ||
+                      (tab.href === '/' && pathname === '/')
+                      ? 'bg-secondary text-white shadow-sm'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
                   )}
                 >
                   {tab.label}
@@ -234,9 +250,11 @@ export function Header({ className, transparent = false, fixed = true }: HeaderP
             </nav>
 
             {/* Mobile Actions */}
-            <div className="space-y-lg pt-4 border-t border-slate-200">
+            <div className="space-y-lg border-t border-slate-200 pt-4">
               <div className="flex-center">
-                <Badge variant="gradient" className="animate-neon-pulse">Live Demo Available</Badge>
+                <Badge variant="gradient" className="animate-neon-pulse">
+                  Live Demo Available
+                </Badge>
               </div>
               <Button
                 variant="secondary"
@@ -260,7 +278,7 @@ export function Header({ className, transparent = false, fixed = true }: HeaderP
       {/* Mobile Menu Backdrop */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
           style={{ top: fixed ? '64px' : '0' }}
           onClick={() => setIsMobileMenuOpen(false)}
         />

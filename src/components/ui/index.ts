@@ -9,15 +9,47 @@ export * from './ThemeToggle';
 export * from './ChatBot';
 export * from './ChatBotTrigger';
 export * from './AITechnologyVisualization';
+export * from './StratexLogo';
 
 // Re-export for convenience
 export { Button } from './Button';
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, FeatureCard, TestimonialCard, CaseStudyCard } from './Card';
-export { Modal, ModalHeader, ModalTitle, ModalDescription, ModalContent, ModalFooter } from './Modal';
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  FeatureCard,
+  TestimonialCard,
+  CaseStudyCard,
+} from './Card';
+export {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalDescription,
+  ModalContent,
+  ModalFooter,
+} from './Modal';
 export { Input, Textarea } from './Input';
-export { Badge, TechnologyBadge, IndustryBadge, StatusBadge, MetricBadge } from './Badge';
-export { Loader, PageLoader, InlineLoader, ButtonLoader, SkeletonLoader, AILoader } from './Loader';
+export {
+  Badge,
+  TechnologyBadge,
+  IndustryBadge,
+  StatusBadge,
+  MetricBadge,
+} from './Badge';
+export {
+  Loader,
+  PageLoader,
+  InlineLoader,
+  ButtonLoader,
+  SkeletonLoader,
+  AILoader,
+} from './Loader';
 export { ThemeToggle } from './ThemeToggle';
 export { ChatBot } from './ChatBot';
 export { ChatBotTrigger } from './ChatBotTrigger';
 export { AITechnologyVisualization } from './AITechnologyVisualization';
+export { StratexLogo } from './StratexLogo';

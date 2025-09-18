@@ -1,34 +1,44 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  subsets: ['latin'],
+  variable: '--font-mono',
 });
 
 export const metadata: Metadata = {
-  title: "GenAI Consulting - Transforming Business Through Intelligence",
-  description: "Leading GenAI consulting firm specializing in AI strategy, implementation, and business transformation. Where enterprise excellence meets AI innovation.",
-  keywords: ["AI consulting", "GenAI", "artificial intelligence", "machine learning", "digital transformation"],
-  authors: [{ name: "GenAI Consulting" }],
-  robots: "index, follow",
+  title: 'Stratex AI - Strategic Excellence in AI Transformation',
+  description:
+    'Leading AI consulting firm specializing in strategic AI implementation and business transformation. Where strategy meets excellence in AI innovation.',
+  keywords: [
+    'AI consulting',
+    'Stratex AI',
+    'artificial intelligence',
+    'machine learning',
+    'digital transformation',
+    'strategic AI',
+  ],
+  authors: [{ name: 'Stratex AI' }],
+  robots: 'index, follow',
   openGraph: {
-    title: "GenAI Consulting - AI Transformation Experts",
-    description: "Transforming enterprises with cutting-edge AI solutions and strategic consulting services.",
-    type: "website",
-    locale: "en_US",
-    siteName: "GenAI Consulting",
+    title: 'Stratex AI - Strategic AI Transformation Experts',
+    description:
+      'Transforming enterprises with cutting-edge AI solutions and strategic consulting services.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Stratex AI',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "GenAI Consulting - AI Transformation Experts",
-    description: "Transforming enterprises with cutting-edge AI solutions and strategic consulting services.",
+    card: 'summary_large_image',
+    title: 'Stratex AI - Strategic AI Transformation Experts',
+    description:
+      'Transforming enterprises with cutting-edge AI solutions and strategic consulting services.',
   },
 };
 
@@ -44,7 +54,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetBrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${jetBrainsMono.variable} font-sans antialiased`}
+      >
         {children}
       </body>
     </html>

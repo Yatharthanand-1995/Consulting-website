@@ -3,35 +3,26 @@
 import { useState } from 'react';
 import {
   Button,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  Badge,
-  ThemeToggle,
   Modal,
   ModalHeader,
   ModalTitle,
   ModalContent,
-  AILoader,
-  TechnologyBadge,
-  FeatureCard
 } from '@/components/ui';
 import { Header, Footer } from '@/components/layout';
-import { Hero, ServicesTeaser, CaseStudiesTeaser, InsightsTeaser, ImpactMetrics } from '@/components/sections';
+import {
+  Hero,
+  ServicesTeaser,
+  CaseStudiesTeaser,
+  InsightsTeaser,
+  ImpactMetrics,
+} from '@/components/sections';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleAIDemo = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 3000);
-  };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
       {/* Header */}
       <Header />
 
@@ -42,9 +33,139 @@ export default function Home() {
           <Hero />
         </section>
 
+        {/* Client Trust Section */}
+        <section
+          className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 py-16"
+          aria-label="Trusted by industry leaders"
+        >
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `
+              radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.3) 1px, transparent 1px),
+              radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.3) 1px, transparent 1px)
+            `,
+              backgroundSize: '50px 50px, 60px 60px',
+            }}
+          />
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="space-y-10 text-center">
+              <p className="text-sm font-medium tracking-wider text-violet-300 uppercase">
+                Trusted by Fortune 500 Leaders
+              </p>
+              <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-6">
+                {[
+                  {
+                    name: 'Global Bank',
+                    logo: 'GB',
+                    color: 'from-indigo-600 to-blue-700',
+                  },
+                  {
+                    name: 'Tech Corp',
+                    logo: 'TC',
+                    color: 'from-violet-600 to-purple-700',
+                  },
+                  {
+                    name: 'Manufacturing',
+                    logo: 'MF',
+                    color: 'from-emerald-600 to-teal-700',
+                  },
+                  {
+                    name: 'Healthcare',
+                    logo: 'HC',
+                    color: 'from-rose-600 to-pink-700',
+                  },
+                  {
+                    name: 'Energy Co',
+                    logo: 'EC',
+                    color: 'from-amber-600 to-orange-700',
+                  },
+                  {
+                    name: 'Retail Chain',
+                    logo: 'RC',
+                    color: 'from-cyan-600 to-blue-700',
+                  },
+                ].map((client, index) => (
+                  <div
+                    key={client.name}
+                    className="group flex items-center justify-center"
+                  >
+                    <div
+                      className={cn(
+                        'flex h-16 w-16 items-center justify-center rounded-lg border border-violet-300/30 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-violet-300/60',
+                        `bg-gradient-to-br ${client.color} opacity-80 group-hover:opacity-100`
+                      )}
+                    >
+                      <span className="text-sm font-bold text-white drop-shadow-lg">
+                        {client.logo}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Animated connection lines */}
+              <div className="mt-8 flex items-center justify-center space-x-2 opacity-40">
+                <div className="h-px w-8 animate-pulse bg-gradient-to-r from-transparent via-violet-400 to-transparent" />
+                <div
+                  className="h-1 w-1 animate-pulse rounded-full bg-emerald-400"
+                  style={{ animationDelay: '0.5s' }}
+                />
+                <div
+                  className="h-px w-12 animate-pulse bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+                  style={{ animationDelay: '1s' }}
+                />
+                <div
+                  className="h-1 w-1 animate-pulse rounded-full bg-cyan-400"
+                  style={{ animationDelay: '1.5s' }}
+                />
+                <div
+                  className="h-px w-8 animate-pulse bg-gradient-to-r from-transparent via-indigo-400 to-transparent"
+                  style={{ animationDelay: '2s' }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Services Teaser Section */}
         <section id="services" aria-label="Our services overview">
           <ServicesTeaser />
+        </section>
+
+        {/* Tech Divider 1 */}
+        <section className="relative overflow-hidden py-16" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-indigo-900/20 to-purple-900/10" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+              linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.1) 50%, transparent 51%),
+              linear-gradient(-45deg, transparent 49%, rgba(99, 102, 241, 0.1) 50%, transparent 51%)
+            `,
+              backgroundSize: '40px 40px',
+            }}
+          />
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="flex items-center justify-center space-x-4 opacity-60">
+              <div className="h-px w-12 animate-pulse bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
+              <div
+                className="h-3 w-3 rotate-45 animate-spin rounded border border-blue-400"
+                style={{ animationDuration: '6s' }}
+              />
+              <div
+                className="h-px w-20 animate-pulse bg-gradient-to-r from-transparent via-indigo-400 to-transparent"
+                style={{ animationDelay: '1s' }}
+              />
+              <div
+                className="h-2 w-2 animate-pulse rounded-full bg-purple-400"
+                style={{ animationDelay: '0.5s' }}
+              />
+              <div
+                className="h-px w-12 animate-pulse bg-gradient-to-r from-transparent via-blue-400 to-transparent"
+                style={{ animationDelay: '1.5s' }}
+              />
+            </div>
+          </div>
         </section>
 
         {/* Case Studies Teaser Section */}
@@ -55,6 +176,33 @@ export default function Home() {
         {/* Insights Teaser Section */}
         <section id="insights" aria-label="Latest insights preview">
           <InsightsTeaser />
+        </section>
+
+        {/* Tech Divider 2 */}
+        <section className="relative overflow-hidden py-12" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/10 via-teal-900/20 to-blue-900/10" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '30px 30px',
+            }}
+          />
+          <div className="relative z-10 container mx-auto px-6">
+            <div className="flex items-center justify-center space-x-6 opacity-50">
+              <div className="h-4 w-4 animate-ping rounded-full border border-teal-400" />
+              <div className="h-px w-16 animate-pulse bg-gradient-to-r from-transparent via-emerald-400 to-transparent" />
+              <div className="h-2 w-2 animate-bounce rounded bg-teal-400" />
+              <div
+                className="h-px w-16 animate-pulse bg-gradient-to-r from-transparent via-emerald-400 to-transparent"
+                style={{ animationDelay: '1s' }}
+              />
+              <div
+                className="h-4 w-4 animate-ping rounded-full border border-teal-400"
+                style={{ animationDelay: '0.8s' }}
+              />
+            </div>
+          </div>
         </section>
 
         {/* Impact Metrics Section */}
@@ -77,7 +225,8 @@ export default function Home() {
         <ModalContent>
           <div className="space-y-6">
             <p id="demo-modal-description">
-              This is a demonstration of our modal component with backdrop blur and smooth animations.
+              This is a demonstration of our modal component with backdrop blur
+              and smooth animations.
             </p>
 
             <div className="space-y-4">
@@ -98,9 +247,9 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-lg">
-                <h4 className="font-semibold mb-2">Modal Features:</h4>
-                <ul className="text-sm text-slate-600 space-y-1" role="list">
+              <div className="rounded-lg bg-slate-50 p-4">
+                <h4 className="mb-2 font-semibold">Modal Features:</h4>
+                <ul className="space-y-1 text-sm text-slate-600" role="list">
                   <li>• Portal-based rendering</li>
                   <li>• Backdrop blur effect</li>
                   <li>• Escape key handling</li>
