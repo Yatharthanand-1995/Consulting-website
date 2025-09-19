@@ -78,8 +78,8 @@ export function ImpactMetrics({ className }: ImpactMetricsProps) {
   const [selectedMetric, setSelectedMetric] = useState<number | null>(null);
 
   return (
-    <section className={cn('py-20 bg-white', className)}>
-      <div className="container mx-auto max-w-7xl px-6">
+    <section className={cn('section-professional section-optimize', className)}>
+      <div className="container-professional">
         {/* Professional Section Header */}
         <div className="text-center space-y-6 mb-16">
           <Badge variant="outline" className="border-primary-navy text-primary-navy">

@@ -65,7 +65,7 @@ const featuredInsights: FeaturedInsight[] = [
 
 export function InsightsTeaser({ className }: InsightsTeaserProps) {
   return (
-    <section className={cn('section-professional', className)}>
+    <section className={cn('section-professional section-optimize', className)}>
       <div className="container-professional">
         {/* Section Header */}
         <div className="space-y-6 text-center">

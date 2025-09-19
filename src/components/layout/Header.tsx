@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Button, Badge, StratexLogo } from '@/components/ui';
+import { Button, Badge, StratexLogo, SmartSearch } from '@/components/ui';
 import { smoothScrollToElement, navigationSections } from '@/lib/smooth-scroll';
 import type { NavigationItem } from '@/types';
 
@@ -17,6 +17,7 @@ export interface HeaderProps {
 const mainNavigationTabs: NavigationItem[] = [
   { label: 'Services', href: '/services' },
   { label: 'Industries', href: '/industries' },
+  { label: 'Research', href: '/research' },
   { label: 'Insights', href: '/our-insights' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -29,6 +30,7 @@ export function Header({
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const router = useRouter();
   const pathname = usePathname();
@@ -110,6 +112,24 @@ export function Header({
     }
   };
 
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to open search
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault();
+        setIsSearchOpen(true);
+      }
+      // Escape to close search
+      if (event.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
+
   return (
     <header
       className={cn(
@@ -129,7 +149,7 @@ export function Header({
         >
           {/* Logo */}
           <div
-            className="flex items-center space-x-4"
+            className="flex items-center"
             onClick={() => handleNavClick('/')}
           >
             <StratexLogo
@@ -170,6 +190,28 @@ export function Header({
 
           {/* Desktop Actions - Simplified */}
           <div className="hidden items-center space-x-4 lg:flex">
+            {/* Search Button */}
+            <div className="relative group">
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="flex items-center space-x-2 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                aria-label="Search"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                <span className="hidden xl:inline text-sm">Search</span>
+                <kbd className="hidden xl:inline-flex items-center px-1.5 py-0.5 text-xs bg-gray-100 border border-gray-200 rounded">
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
+
             <Button variant="secondary" size="md" className="font-medium">
               Schedule Consultation
             </Button>
@@ -274,6 +316,66 @@ export function Header({
           style={{ top: fixed ? '64px' : '0' }}
           onClick={() => setIsMobileMenuOpen(false)}
         />
+      )}
+
+      {/* Search Modal */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsSearchOpen(false)}
+          />
+
+          {/* Modal Content */}
+          <div className="flex min-h-full items-start justify-center p-4 pt-16">
+            <div className="relative w-full max-w-2xl">
+              {/* Search Component */}
+              <div className="rounded-lg bg-white p-6 shadow-xl">
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    Search Stratex AI
+                  </h2>
+                  <button
+                    onClick={() => setIsSearchOpen(false)}
+                    className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                    aria-label="Close search"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <SmartSearch
+                  className="w-full"
+                  placeholder="Search services, industries, insights, and more..."
+                  showFilters={true}
+                  maxResults={10}
+                  autoFocus={true}
+                  onSearch={(query, results) => {
+                    console.log(`Search: "${query}" returned ${results.length} results`);
+                  }}
+                />
+
+                {/* Search Tips */}
+                <div className="mt-6 text-xs text-gray-500">
+                  <p className="mb-2 font-medium">Search Tips:</p>
+                  <ul className="space-y-1">
+                    <li>• Try "AI strategy" to find strategic consulting services</li>
+                    <li>• Search "healthcare" to see industry-specific solutions</li>
+                    <li>• Use arrow keys to navigate results, Enter to select</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </header>
   );

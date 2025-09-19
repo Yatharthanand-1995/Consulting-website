@@ -63,8 +63,8 @@ const featuredCases = [
 
 export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
   return (
-    <section className={cn('bg-white py-16', className)}>
-      <div className="container mx-auto px-6">
+    <section className={cn('section-professional section-optimize', className)}>
+      <div className="container-professional">
         {/* Section Header */}
         <div className="space-y-6 text-center">
           <Badge

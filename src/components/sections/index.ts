@@ -10,6 +10,7 @@ export { ImpactMetrics } from './ImpactMetrics';
 export { ServicesTeaser } from './ServicesTeaser';
 export { CaseStudiesTeaser } from './CaseStudiesTeaser';
 export { InsightsTeaser } from './InsightsTeaser';
+export { ClientTrust } from './ClientTrust';
 
 // Re-export for convenience
 export { default as HeroComponent } from './Hero';

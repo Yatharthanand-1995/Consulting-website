@@ -131,28 +131,16 @@ export function StratexLogo({
   return (
     <div className={cn('group flex items-center space-x-3', className)}>
       <LogoIcon />
-      <div className="flex flex-col">
+      <div className="flex items-center">
         <h1
           className={cn(
-            'font-bold tracking-tight',
+            'font-bold tracking-tight leading-none',
             textSizeClasses[size],
             variant === 'white' ? 'text-white' : 'text-slate-800'
           )}
         >
           Stratex AI
         </h1>
-        {size !== 'sm' && (
-          <p
-            className={cn(
-              'text-xs font-medium tracking-wide uppercase opacity-75',
-              variant === 'white' ? 'text-white/80' : 'text-slate-600',
-              animated &&
-                'transition-opacity duration-300 group-hover:opacity-100'
-            )}
-          >
-            Where Strategy Meets Intelligence
-          </p>
-        )}
       </div>
     </div>
   );

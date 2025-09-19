@@ -10,6 +10,8 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
+  InteractiveCard,
+  InteractiveButton,
 } from '@/components/ui';
 
 export interface ServicesTeaserProps {
@@ -77,15 +79,18 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
           </p>
         </div>
 
-        {/* Featured Services Grid */}
+        {/* Featured Services Grid with Interactive Cards */}
         <div
-          className="mb-12 grid gap-8 lg:grid-cols-3"
+          className="mb-12 grid gap-8 lg:grid-cols-3 stagger-animation"
           style={{ marginTop: 'var(--layout-content)' }}
         >
           {featuredServices.map(service => (
-            <Card
+            <InteractiveCard
               key={service.id}
-              className="group relative border border-gray-200 bg-white p-6 transition-all duration-300 hover:shadow-lg"
+              className="group relative p-6"
+              tilt
+              lift
+              magnetic
             >
               <CardHeader className="space-y-4">
                 <div className="flex items-start justify-between">
@@ -127,7 +132,7 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </InteractiveCard>
           ))}
         </div>
 
@@ -144,7 +149,7 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/our-work">
-                <Button variant="primary" className="font-semibold">
+                <InteractiveButton variant="primary" className="font-semibold" ripple glow>
                   View All Services
                   <svg
                     className="ml-2 h-4 w-4"
@@ -159,12 +164,12 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </Button>
+                </InteractiveButton>
               </Link>
               <Link href="/contact">
-                <Button variant="secondary" className="font-semibold">
+                <InteractiveButton variant="secondary" className="font-semibold hover-lift" ripple>
                   Schedule Consultation
-                </Button>
+                </InteractiveButton>
               </Link>
             </div>
           </div>

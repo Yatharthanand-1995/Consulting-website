@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Button, Badge } from '@/components/ui';
+import { Button, Badge, InteractiveButton, AIVisualization } from '@/components/ui';
 
 export interface HeroProps {
   className?: string;
@@ -39,13 +39,13 @@ export function Hero({ className }: HeroProps) {
       />
 
       <div className="relative z-10 container mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid min-h-[calc(80vh-8rem)] items-center gap-12 md:grid-cols-2 lg:min-h-[calc(90vh-8rem)] lg:gap-16">
+        <div className="grid min-h-[calc(80vh-8rem)] items-center gap-12 md:grid-cols-2 lg:min-h-[calc(90vh-8rem)] lg:gap-20">
           {/* Left Column - Content */}
           <div className="space-y-8 text-center md:text-left lg:space-y-10">
             {/* Authority Badge - Simplified */}
             <div
               className={cn(
-                'transition-all duration-500',
+                'smooth-transition will-change-transform will-change-opacity',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
@@ -62,11 +62,12 @@ export function Hero({ className }: HeroProps) {
             {/* Main Headline - McKinsey Style */}
             <div
               className={cn(
-                'transition-all delay-200 duration-500',
+                'smooth-transition will-change-transform will-change-opacity',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
               )}
+              style={{ transitionDelay: '0.2s' }}
             >
               <h1 className="text-4xl leading-tight font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
                 Strategic AI transformation for{' '}
@@ -96,7 +97,7 @@ export function Hero({ className }: HeroProps) {
               </div>
             </div>
 
-            {/* Clear CTA Buttons */}
+            {/* Clear CTA Buttons with Interactions */}
             <div
               className={cn(
                 'flex flex-col gap-4 transition-all delay-400 duration-500 sm:flex-row md:justify-start',
@@ -105,88 +106,57 @@ export function Hero({ className }: HeroProps) {
                   : 'translate-y-4 opacity-0'
               )}
             >
-              <Button
+              <InteractiveButton
                 variant="primary"
                 size="lg"
-                className="font-semibold"
+                className="font-semibold pulse-glow"
                 aria-label="Schedule consultation call"
+                ripple
+                glow
               >
                 Schedule Consultation
-              </Button>
-              <Button
+              </InteractiveButton>
+              <InteractiveButton
                 variant="secondary"
                 size="lg"
-                className="font-semibold"
+                className="font-semibold hover-lift"
                 aria-label="View our insights"
+                ripple
               >
                 View Our Insights
-              </Button>
+              </InteractiveButton>
             </div>
           </div>
 
-          {/* Right Column - Clean Metrics Card */}
+          {/* Right Column - AI Visualization */}
           <div className="relative flex items-center justify-center">
             <div
               className={cn(
-                'w-full max-w-lg transition-all delay-300 duration-500',
+                'w-full max-w-xl transition-all delay-300 duration-500',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
               )}
             >
-              {/* Clean Professional Metrics Card */}
-              <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
-                <div className="mb-8 text-center">
-                  <h2 className="mb-2 text-2xl font-semibold text-gray-900">
-                    Proven Results
-                  </h2>
-                  <p className="text-gray-600">
-                    Enterprise AI transformation outcomes
-                  </p>
-                </div>
-
-                {/* Key Metrics */}
-                <div className="space-y-6">
-                  {[
-                    {
-                      value: '$2.3B+',
-                      label: 'Value Generated',
-                      description: 'Across Fortune 500 clients',
-                    },
-                    {
-                      value: '97%',
-                      label: 'Client Satisfaction',
-                      description: 'Project success rate',
-                    },
-                    {
-                      value: '6 months',
-                      label: 'Average ROI',
-                      description: 'Time to measurable results',
-                    },
-                  ].map((metric, index) => (
-                    <div
-                      key={metric.label}
-                      className={cn(
-                        'border-l-4 border-blue-600 pl-4 transition-all duration-500',
-                        showMetrics
-                          ? 'translate-x-0 opacity-100'
-                          : 'translate-x-4 opacity-0'
-                      )}
-                      style={{ transitionDelay: `${index * 0.2}s` }}
-                    >
-                      <div className="text-3xl font-bold text-gray-900">
-                        {metric.value}
-                      </div>
-                      <div className="text-sm font-semibold text-gray-700">
-                        {metric.label}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {metric.description}
-                      </div>
-                    </div>
-                  ))}
+              {/* Floating Label */}
+              <div
+                className={cn(
+                  'text-center mb-4 transition-all delay-1000 duration-500',
+                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                )}
+              >
+                <div className="inline-block bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 border border-blue-200 shadow-sm">
+                  <span className="text-sm font-medium text-blue-700">
+                    AI Intelligence Network
+                  </span>
                 </div>
               </div>
+
+              {/* Eye-catching AI Data Visualization */}
+              <AIVisualization
+                animated={true}
+                className="hover-lift interactive"
+              />
             </div>
           </div>
         </div>

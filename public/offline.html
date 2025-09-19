@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Stratex AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f7f8fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f2937;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        p {
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .features {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .features h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 4px 0;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: #059669;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .retry-btn {
+            background: #003a70;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .retry-btn:hover {
+            background: #002952;
+            transform: translateY(-1px);
+        }
+
+        .retry-btn:active {
+            transform: translateY(0);
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>You're Offline</h1>
+        <p>
+            It looks like you've lost your internet connection. Don't worry -
+            you can still browse some cached content and we'll reconnect you automatically.
+        </p>
+
+        <div class="features">
+            <h3>Available Offline:</h3>
+            <ul>
+                <li>Recently visited pages</li>
+                <li>Cached service information</li>
+                <li>Industry overviews</li>
+                <li>Company information</li>
+            </ul>
+        </div>
+
+        <button class="retry-btn" onclick="checkConnection()">
+            Try Again
+        </button>
+
+        <div class="status" id="status">
+            We'll automatically reconnect when your internet is back.
+        </div>
+    </div>
+
+    <script>
+        let retryCount = 0;
+        const maxRetries = 5;
+
+        function checkConnection() {
+            const statusEl = document.getElementById('status');
+            const button = document.querySelector('.retry-btn');
+
+            button.textContent = 'Checking...';
+            button.disabled = true;
+
+            // Try to fetch a small resource
+            fetch('/?offline-check', {
+                method: 'HEAD',
+                cache: 'no-cache'
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusEl.textContent = 'Connection restored! Redirecting...';
+                    statusEl.style.color = '#059669';
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                } else {
+                    throw new Error('Still offline');
+                }
+            })
+            .catch(() => {
+                retryCount++;
+                button.textContent = 'Try Again';
+                button.disabled = false;
+
+                if (retryCount >= maxRetries) {
+                    statusEl.textContent = 'Please check your internet connection and try again.';
+                    statusEl.style.color = '#dc2626';
+                } else {
+                    statusEl.textContent = `Connection failed. Try again (${retryCount}/${maxRetries})`;
+                }
+            });
+        }
+
+        // Auto-retry every 30 seconds
+        setInterval(() => {
+            if (navigator.onLine) {
+                checkConnection();
+            }
+        }, 30000);
+
+        // Listen for online events
+        window.addEventListener('online', () => {
+            checkConnection();
+        });
+
+        // Show connection status
+        window.addEventListener('load', () => {
+            if (navigator.onLine) {
+                checkConnection();
+            }
+        });
+    </script>
+</body>
+</html>

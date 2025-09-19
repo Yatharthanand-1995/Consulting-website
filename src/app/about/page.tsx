@@ -8,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
+  PageHero,
+  CTASection,
 } from '@/components/ui';
 
 export default function AboutPage() {
@@ -20,31 +22,31 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: 'Dr. Sarah Chen',
-      role: 'Founder & CEO',
-      expertise: 'AI Strategy & Machine Learning',
-      background: 'Former Google AI Research, MIT PhD',
+      name: 'Dr. Saurabh Gupta',
+      role: 'Chief AI Engineer',
+      expertise: 'AI Strategy & Advanced Research',
+      background: 'Former Meta AI Research, IIT Delhi PhD',
       image: '/api/placeholder/300/400',
     },
     {
-      name: 'Marcus Rodriguez',
-      role: 'Chief Technology Officer',
-      expertise: 'Enterprise Architecture & LLM Implementation',
-      background: 'Ex-Microsoft Azure AI, Stanford MS',
+      name: 'Himanshu Chauhan',
+      role: 'Chief AI Engineer',
+      expertise: 'Enterprise Architecture & AI Infrastructure',
+      background: 'Ex-Amazon Web Services, IIT Bombay MS',
       image: '/api/placeholder/300/400',
     },
     {
-      name: 'Dr. Priya Sharma',
-      role: 'Head of AI Ethics',
-      expertise: 'Responsible AI & Governance',
-      background: 'Former IBM Watson Ethics Board, PhD Ethics',
+      name: 'Hitesh Gautam',
+      role: 'Chief AI Engineer',
+      expertise: 'Machine Learning & Predictive Analytics',
+      background: 'Former Uber AI Labs, NIT Kurukshetra MS',
       image: '/api/placeholder/300/400',
     },
     {
-      name: 'James Thompson',
-      role: 'Director of Strategy',
-      expertise: 'Business Transformation & Change Management',
-      background: 'Ex-McKinsey Partner, Harvard MBA',
+      name: 'Yatharth Anand',
+      role: 'Chief AI Engineer',
+      expertise: 'Emerging Technologies & Product Strategy',
+      background: 'Ex-Tesla Autopilot, DTU B.Tech',
       image: '/api/placeholder/300/400',
     },
   ];
@@ -81,25 +83,16 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="from-background via-background to-muted/20 bg-gradient-to-br py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="gradient" className="mb-6">
-              About Stratex AI
-            </Badge>
-            <h1 className="mb-6 text-4xl font-bold lg:text-6xl">
-              <span className="from-secondary to-accent bg-gradient-to-r bg-clip-text text-transparent">
-                Transforming Enterprises Through Intelligent Innovation
-              </span>
-            </h1>
-            <p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
-              We are the premier strategic AI consulting firm, helping Fortune
-              500 companies navigate the AI revolution with strategic insight,
-              technical excellence, and measurable results.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge={{ text: 'About Stratex AI', variant: 'gradient' }}
+        title={
+          <span className="from-secondary to-accent bg-gradient-to-r bg-clip-text text-transparent">
+            Transforming Enterprises Through Intelligent Innovation
+          </span>
+        }
+        description="We are the premier strategic AI consulting firm, helping Fortune 500 companies navigate the AI revolution with strategic insight, technical excellence, and measurable results."
+        background="gradient"
+      />
 
       {/* Stats Section */}
       <section className="py-16">
@@ -237,27 +230,23 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="from-secondary/10 to-accent/10 border-secondary/20 mx-auto max-w-4xl rounded-2xl border bg-gradient-to-r p-12 text-center">
-            <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-xl">
-              Join the ranks of Fortune 500 companies who have successfully
-              implemented AI with our proven methodology and expert guidance.
-            </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Button variant="gradient" size="xl">
-                Schedule Strategy Session
-              </Button>
-              <Button variant="outline" size="xl">
-                Download Company Profile
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        variant="bordered"
+        title="Ready to Transform Your Business?"
+        description="Join the ranks of Fortune 500 companies who have successfully implemented AI with our proven methodology and expert guidance."
+        actions={[
+          {
+            text: 'Schedule Strategy Session',
+            variant: 'primary',
+            size: 'xl'
+          },
+          {
+            text: 'Download Company Profile',
+            variant: 'outline',
+            size: 'xl'
+          }
+        ]}
+      />
 
       <Footer className="mt-0" />
     </div>
