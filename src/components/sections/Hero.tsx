@@ -61,48 +61,28 @@ export function Hero({ className }: HeroProps) {
   return (
     <section
       className={cn(
-        'relative flex min-h-[80vh] items-center justify-center overflow-hidden px-6 py-20 md:min-h-[90vh]',
+        'relative flex min-h-[80vh] items-center justify-center px-6 py-20 md:min-h-[90vh]',
         className
       )}
     >
-      {/* Professional Consulting Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-slate-100/50 to-slate-200/30" />
+      {/* Clean Professional Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
-      {/* Sophisticated Pattern Overlay */}
+      {/* Minimal Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `
-          radial-gradient(circle at 25% 25%, #1e293b 1px, transparent 1px),
-          radial-gradient(circle at 75% 75%, #334155 0.5px, transparent 0.5px),
-          linear-gradient(45deg, transparent 49%, rgba(30, 41, 59, 0.05) 50%, transparent 51%)
-        `,
-          backgroundSize: '80px 80px, 40px 40px, 120px 120px',
+          backgroundImage: `radial-gradient(circle at 50% 50%, #1f2937 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
         }}
         aria-hidden="true"
       />
-
-      {/* Elegant Geometric Lines */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
-        <div className="absolute top-2/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-        <div className="absolute top-0 left-1/4 h-full w-px bg-gradient-to-b from-transparent via-slate-400 to-transparent" />
-        <div className="absolute top-0 right-1/4 h-full w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
-      </div>
-
-      {/* Subtle Professional Accents */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/6 h-2 w-2 rounded-full bg-slate-400 opacity-20" />
-        <div className="absolute top-3/4 right-1/6 h-1 w-1 rounded-full bg-slate-500 opacity-30" />
-        <div className="absolute bottom-1/4 left-1/2 h-3 w-3 rotate-45 rounded border border-slate-400 opacity-15" />
-      </div>
 
       <div className="relative z-10 container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid min-h-[calc(80vh-8rem)] items-center gap-12 md:grid-cols-2 lg:min-h-[calc(90vh-8rem)] lg:gap-16">
           {/* Left Column - Content */}
           <div className="space-y-8 text-center md:text-left lg:space-y-10">
-            {/* Authority Badge */}
+            {/* Authority Badge - Simplified */}
             <div
               className={cn(
                 'transition-all duration-500',
@@ -113,13 +93,13 @@ export function Hero({ className }: HeroProps) {
             >
               <Badge
                 variant="outline"
-                className="border-slate-600 bg-slate-100/80 font-medium text-slate-700 backdrop-blur-sm"
+                className="border-blue-200 bg-blue-50 font-medium text-blue-700"
               >
-                Fortune 500 AI Transformation
+                Enterprise AI Solutions
               </Badge>
             </div>
 
-            {/* Authority Statement */}
+            {/* Main Headline - McKinsey Style */}
             <div
               className={cn(
                 'transition-all delay-200 duration-500',
@@ -128,16 +108,13 @@ export function Hero({ className }: HeroProps) {
                   : 'translate-y-4 opacity-0'
               )}
             >
-              <h1 className="text-3xl leading-[1.2] font-semibold tracking-tight text-balance text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-                Transforming enterprises through{' '}
-                <span className="relative text-slate-700">
-                  <span className="relative z-10">intelligent automation</span>
-                  <span className="absolute bottom-2 left-0 -z-10 h-3 w-full bg-gradient-to-r from-slate-200 to-slate-300 opacity-60"></span>
-                </span>
+              <h1 className="text-4xl leading-tight font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
+                Strategic AI transformation for{' '}
+                <span className="text-blue-700">enterprise leaders</span>
               </h1>
             </div>
 
-            {/* Professional Subtitle */}
+            {/* Clear Value Proposition */}
             <div
               className={cn(
                 'transition-all delay-300 duration-500',
@@ -146,183 +123,138 @@ export function Hero({ className }: HeroProps) {
                   : 'translate-y-4 opacity-0'
               )}
             >
-              <div className="mx-auto max-w-none md:mx-0 md:max-w-lg">
-                <p className="text-lg leading-relaxed text-pretty text-slate-600">
-                  We deliver enterprise AI solutions that generate measurable
-                  value. Our methodology has created{' '}
-                  <span className="font-semibold text-slate-900">
-                    $2.3B in value
-                  </span>{' '}
-                  with{' '}
-                  <span className="font-semibold text-slate-900">
-                    97% client satisfaction
-                  </span>
-                  .
+              <div className="mx-auto max-w-2xl md:mx-0">
+                <p className="text-xl leading-relaxed text-gray-600">
+                  We help Fortune 500 companies implement AI solutions that
+                  drive{' '}
+                  <strong className="text-gray-900">
+                    measurable business value
+                  </strong>{' '}
+                  with proven methodology and{' '}
+                  <strong className="text-gray-900">6-month ROI</strong>.
                 </p>
               </div>
             </div>
 
-            {/* Professional CTA */}
+            {/* Clear CTA Buttons */}
             <div
               className={cn(
-                'flex flex-col justify-center gap-3 transition-all delay-400 duration-500 sm:flex-row sm:gap-4 md:justify-start',
+                'flex flex-col gap-4 transition-all delay-400 duration-500 sm:flex-row md:justify-start',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
               )}
             >
               <Button
+                variant="primary"
                 size="lg"
-                className="rounded-md bg-slate-900 px-8 py-4 text-base font-medium text-white transition-all duration-200 hover:-translate-y-px hover:transform hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/25"
-                aria-label="Explore our thought leadership"
+                className="font-semibold"
+                aria-label="Schedule consultation call"
               >
-                Explore our thinking
-                <svg
-                  className="ml-2 h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                Schedule Consultation
               </Button>
               <Button
+                variant="secondary"
                 size="lg"
-                variant="outline"
-                className="rounded-md border-2 border-slate-300 px-8 py-4 text-base font-medium text-slate-900 transition-all duration-200 hover:-translate-y-px hover:transform hover:border-slate-400 hover:bg-slate-100 hover:shadow-lg"
-                aria-label="Schedule consultation"
+                className="font-semibold"
+                aria-label="View our insights"
               >
-                Schedule consultation
+                View Our Insights
               </Button>
             </div>
           </div>
 
-          {/* Right Column - AI Technology Visualization & Metrics */}
+          {/* Right Column - Clean Metrics Card */}
           <div className="relative flex items-center justify-center">
             <div
               className={cn(
-                'w-full max-w-xl transition-all delay-300 duration-500',
+                'w-full max-w-lg transition-all delay-300 duration-500',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
               )}
             >
-              {/* Executive Metrics Card with AI Visualization */}
-              <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-white p-8 shadow-lg lg:p-10">
-                {/* Background AI Visualization */}
-                <div className="pointer-events-none absolute inset-0 opacity-5">
-                  <AITechnologyVisualization
-                    variant="background"
-                    showLabels={false}
-                  />
+              {/* Clean Professional Metrics Card */}
+              <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+                <div className="mb-8 text-center">
+                  <h2 className="mb-2 text-2xl font-semibold text-gray-900">
+                    Proven Results
+                  </h2>
+                  <p className="text-gray-600">
+                    Enterprise AI transformation outcomes
+                  </p>
                 </div>
 
-                <div className="relative z-10">
-                  <div className="mb-8 text-center">
-                    <h2 className="mb-3 text-xl font-semibold text-slate-800 lg:text-2xl">
-                      AI Technology Stack
-                    </h2>
-                    <p className="text-sm text-slate-600">
-                      Enterprise-grade AI implementations
-                    </p>
-                  </div>
-
-                  {/* AI Technology Visualization */}
-                  <div className="mb-8 flex justify-center">
-                    <AITechnologyVisualization
-                      variant="compact"
-                      showLabels={false}
-                    />
-                  </div>
-
-                  {/* Professional Metrics */}
-                  <div className="space-y-6">
-                    {[
-                      {
-                        value: '$2.3B',
-                        label: 'Value Generated',
-                        description: 'Across Fortune 500 clients',
-                      },
-                      {
-                        value: '97%',
-                        label: 'Client Satisfaction',
-                        description: 'Based on project outcomes',
-                      },
-                      {
-                        value: '6 months',
-                        label: 'Average ROI Timeline',
-                        description: 'Strategy to measurable results',
-                      },
-                    ].map((metric, index) => (
-                      <div
-                        key={metric.label}
-                        className={cn(
-                          'border-l-2 border-slate-900 pl-4 transition-all duration-500',
-                          showMetrics
-                            ? 'translate-x-0 opacity-100'
-                            : 'translate-x-4 opacity-0'
-                        )}
-                        style={{ transitionDelay: `${index * 0.2}s` }}
-                      >
-                        <div className="font-mono text-xl font-bold text-slate-900">
-                          {metric.value}
-                        </div>
-                        <div className="text-ink-black text-sm font-medium">
-                          {metric.label}
-                        </div>
-                        <div className="text-muted-foreground text-xs">
-                          {metric.description}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Professional CTA */}
-                  <div className="border-border mt-8 border-t pt-6 text-center">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-slate-900"
+                {/* Key Metrics */}
+                <div className="space-y-6">
+                  {[
+                    {
+                      value: '$2.3B+',
+                      label: 'Value Generated',
+                      description: 'Across Fortune 500 clients',
+                    },
+                    {
+                      value: '97%',
+                      label: 'Client Satisfaction',
+                      description: 'Project success rate',
+                    },
+                    {
+                      value: '6 months',
+                      label: 'Average ROI',
+                      description: 'Time to measurable results',
+                    },
+                  ].map((metric, index) => (
+                    <div
+                      key={metric.label}
+                      className={cn(
+                        'border-l-4 border-blue-600 pl-4 transition-all duration-500',
+                        showMetrics
+                          ? 'translate-x-0 opacity-100'
+                          : 'translate-x-4 opacity-0'
+                      )}
+                      style={{ transitionDelay: `${index * 0.2}s` }}
                     >
-                      View our technology capabilities →
-                    </Button>
-                  </div>
+                      <div className="text-3xl font-bold text-gray-900">
+                        {metric.value}
+                      </div>
+                      <div className="text-sm font-semibold text-gray-700">
+                        {metric.label}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {metric.description}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section - Professional Assurance */}
+        {/* Bottom Section - Trust Indicators */}
         <div
           className={cn(
             'mt-16 transition-all delay-600 duration-500 lg:mt-20',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
-          <div className="flex flex-col items-center justify-center gap-8 text-center sm:flex-row lg:gap-12">
-            <div className="flex items-center space-x-3 text-slate-600">
-              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-emerald-500"></div>
-              <span className="text-sm font-medium lg:text-base">
+          <div className="flex flex-col items-center justify-center gap-6 text-center sm:flex-row lg:gap-12">
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
+              <span className="text-sm font-medium">
                 SOC 2 Type II Certified
               </span>
             </div>
-            <div className="flex items-center space-x-3 text-slate-600">
-              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-emerald-500"></div>
-              <span className="text-sm font-medium lg:text-base">
-                Average 6-month ROI
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
+              <span className="text-sm font-medium">
+                150+ Fortune 500 Clients
               </span>
             </div>
-            <div className="flex items-center space-x-3 text-slate-600">
-              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-emerald-500"></div>
-              <span className="text-sm font-medium lg:text-base">
-                Global delivery capability
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
+              <span className="text-sm font-medium">
+                Global Delivery Network
               </span>
             </div>
           </div>

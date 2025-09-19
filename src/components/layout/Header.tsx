@@ -13,14 +13,13 @@ export interface HeaderProps {
   fixed?: boolean;
 }
 
-// McKinsey-style main navigation tabs
+// Simplified professional navigation (BCG/McKinsey style)
 const mainNavigationTabs: NavigationItem[] = [
-  { label: 'Overview', href: '/' },
-  { label: 'Our Work', href: '/our-work' },
-  { label: 'Our People', href: '/our-people' },
-  { label: 'Our Insights', href: '/our-insights' },
-  { label: 'Careers', href: '/careers' },
-  { label: 'Contact Us', href: '/contact' },
+  { label: 'Services', href: '/services' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Insights', href: '/our-insights' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export function Header({
@@ -149,20 +148,18 @@ export function Header({
                 key={tab.href}
                 onClick={() => handleNavClick(tab.href)}
                 className={cn(
-                  'group relative px-4 py-2 text-sm font-medium transition-all duration-300',
-                  pathname === tab.href ||
-                    (tab.href === '/' && pathname === '/')
-                    ? 'border-secondary border-b-2 text-slate-900'
-                    : 'border-b-2 border-transparent text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                  'group relative px-4 py-2 text-sm font-medium transition-all duration-200',
+                  pathname === tab.href
+                    ? 'border-b-2 border-blue-600 text-blue-700'
+                    : 'border-b-2 border-transparent text-gray-600 hover:border-gray-300 hover:text-gray-900'
                 )}
               >
                 {tab.label}
                 {/* Active indicator */}
                 <span
                   className={cn(
-                    'bg-secondary absolute inset-x-0 -bottom-px h-0.5 transition-all duration-300',
-                    pathname === tab.href ||
-                      (tab.href === '/' && pathname === '/')
+                    'absolute inset-x-0 -bottom-px h-0.5 bg-blue-600 transition-all duration-200',
+                    pathname === tab.href
                       ? 'opacity-100'
                       : 'opacity-0 group-hover:opacity-50'
                   )}
@@ -171,15 +168,16 @@ export function Header({
             ))}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="lg:flex-professional hidden">
-            <Badge variant="gradient" className="animate-neon-pulse">
-              Live Demo
-            </Badge>
-            <Button variant="secondary" className="component-button">
+          {/* Desktop Actions - Simplified */}
+          <div className="hidden items-center space-x-4 lg:flex">
+            <Button variant="secondary" size="md" className="font-medium">
               Schedule Consultation
             </Button>
-            <Button variant="gradient" className="component-button">
+            <Button
+              variant="primary"
+              size="md"
+              className="font-medium shadow-sm"
+            >
               Get Started
             </Button>
           </div>
@@ -238,10 +236,9 @@ export function Header({
                   onClick={() => handleNavClick(tab.href)}
                   className={cn(
                     'block w-full rounded-lg px-4 py-3 text-left font-medium transition-all duration-200',
-                    pathname === tab.href ||
-                      (tab.href === '/' && pathname === '/')
-                      ? 'bg-secondary text-white shadow-sm'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                    pathname === tab.href
+                      ? 'bg-blue-700 text-white shadow-sm'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                   )}
                 >
                   {tab.label}
@@ -249,23 +246,18 @@ export function Header({
               ))}
             </nav>
 
-            {/* Mobile Actions */}
-            <div className="space-y-lg border-t border-slate-200 pt-4">
-              <div className="flex-center">
-                <Badge variant="gradient" className="animate-neon-pulse">
-                  Live Demo Available
-                </Badge>
-              </div>
+            {/* Mobile Actions - Simplified */}
+            <div className="space-y-4 border-t border-slate-200 pt-4">
               <Button
                 variant="secondary"
-                className="component-button w-full"
+                className="w-full font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Schedule Consultation
               </Button>
               <Button
-                variant="gradient"
-                className="component-button w-full"
+                variant="primary"
+                className="w-full font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Get Started

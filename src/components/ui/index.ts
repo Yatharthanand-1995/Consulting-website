@@ -1,5 +1,6 @@
 // Core UI Components Export
 export * from './Button';
+export * from './Breadcrumb';
 export * from './Card';
 export * from './Modal';
 export * from './Input';
@@ -53,3 +54,4 @@ export { ChatBot } from './ChatBot';
 export { ChatBotTrigger } from './ChatBotTrigger';
 export { AITechnologyVisualization } from './AITechnologyVisualization';
 export { StratexLogo } from './StratexLogo';
+export { Breadcrumb } from './Breadcrumb';

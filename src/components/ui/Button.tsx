@@ -5,27 +5,26 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  // McKinsey-style professional base
-  'inline-flex items-center justify-center whitespace-nowrap rounded font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-navy focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative',
+  // WCAG AA compliant professional base
+  'inline-flex items-center justify-center whitespace-nowrap rounded font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary-navy text-white hover:bg-midnight-blue border-2 border-transparent active:bg-primary-navy/90',
+          'bg-blue-700 text-white hover:bg-blue-800 border-2 border-transparent active:bg-blue-900 shadow-sm hover:shadow-md',
         secondary:
-          'bg-transparent text-primary-navy border-2 border-primary-navy hover:bg-primary-navy hover:text-white active:bg-primary-navy/90 active:text-white',
+          'bg-transparent text-blue-700 border-2 border-blue-700 hover:bg-blue-700 hover:text-white active:bg-blue-800 active:text-white',
         ghost:
-          'text-primary-navy hover:bg-muted active:bg-muted/80 border-2 border-transparent',
-        link:
-          'text-primary-navy underline-offset-4 hover:underline hover:text-midnight-blue p-0 h-auto',
+          'text-blue-700 hover:bg-blue-50 active:bg-blue-100 border-2 border-transparent',
+        link: 'text-blue-700 underline-offset-4 hover:underline hover:text-blue-800 p-0 h-auto',
         outline:
-          'border-2 border-border bg-transparent text-foreground hover:bg-muted hover:border-primary-navy/20',
+          'border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-blue-500',
         success:
-          'bg-data-green text-white hover:bg-data-green/90 border-2 border-transparent',
+          'bg-green-700 text-white hover:bg-green-800 border-2 border-transparent',
         muted:
-          'bg-muted text-muted-foreground hover:bg-border border-2 border-transparent',
+          'bg-gray-100 text-gray-700 hover:bg-gray-200 border-2 border-transparent',
         gradient:
-          'bg-gradient-to-r from-primary-navy to-accent-blue text-white hover:opacity-90 border-2 border-transparent',
+          'bg-gradient-to-r from-blue-700 to-blue-600 text-white hover:from-blue-800 hover:to-blue-700 border-2 border-transparent shadow-sm hover:shadow-md',
       },
       size: {
         sm: 'h-9 px-4 text-sm',
@@ -81,7 +80,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           rel={external ? 'noopener noreferrer' : undefined}
           className={cn(
             buttonVariants({ variant, size }),
-            'no-underline cursor-pointer',
+            'cursor-pointer no-underline',
             className
           )}
         >
@@ -117,7 +116,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {/* Loading spinner */}
         {loading && (
           <svg
-            className="animate-spin -ml-1 mr-2 h-4 w-4"
+            className="mr-2 -ml-1 h-4 w-4 animate-spin"
             fill="none"
             viewBox="0 0 24 24"
           >
