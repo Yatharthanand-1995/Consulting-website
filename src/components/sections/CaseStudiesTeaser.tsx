@@ -19,98 +19,97 @@ export interface CaseStudiesTeaserProps {
 const featuredCases = [
   {
     id: 'global-manufacturer',
-    title: 'Global Manufacturing Giant: $50M Cost Reduction',
-    company: 'Fortune 100 Manufacturer',
+    title: 'Fortune 100 Manufacturer Achieves $50M Annual Savings',
+    company: 'Global Manufacturing Leader',
     industry: 'Manufacturing',
-    challenge: 'Supply chain inefficiencies and quality control issues',
+    challenge:
+      'Complex supply chain inefficiencies and inconsistent quality control across 50+ facilities',
     solution:
-      'AI-driven supply chain optimization and computer vision quality control',
+      'Implemented AI-powered supply chain optimization and computer vision quality assurance system',
     results: {
-      costReduction: '$50M',
-      timeToValue: '6 months',
-      efficiency: '35%',
+      savings: '$50M',
+      implementation: '6 months',
+      improvement: '35%',
     },
+    impact:
+      'Transformed global operations with predictive maintenance and automated quality control',
     technologies: [
       'Machine Learning',
       'Computer Vision',
       'Predictive Analytics',
     ],
     icon: '🏭',
-    color: 'from-blue-500 to-indigo-500',
   },
   {
     id: 'financial-services',
-    title: 'Leading Bank: 340% ROI on AI Investment',
-    company: 'Top 5 US Bank',
+    title: 'Major Bank Delivers 340% ROI Through AI Automation',
+    company: 'Top 5 US Financial Institution',
     industry: 'Financial Services',
-    challenge: 'Manual processes and fraud detection inefficiencies',
-    solution: 'Automated loan processing and advanced fraud detection systems',
+    challenge:
+      'Manual loan processing bottlenecks and rising fraud losses impacting customer experience',
+    solution:
+      'Deployed intelligent automation for loan processing and advanced fraud detection algorithms',
     results: {
       roi: '340%',
-      timeToValue: '4 months',
+      deployment: '4 months',
       accuracy: '99.2%',
     },
-    technologies: ['Natural Language Processing', 'Anomaly Detection', 'RPA'],
+    impact:
+      'Accelerated loan approval times by 80% while reducing fraud losses by 60%',
+    technologies: ['NLP', 'Anomaly Detection', 'Process Automation'],
     icon: '🏦',
-    color: 'from-green-500 to-emerald-500',
   },
 ];
 
 export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
   return (
-    <section className={cn('section-professional bg-slate-50', className)}>
-      <div className="container-professional">
+    <section className={cn('bg-white py-16', className)}>
+      <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="space-y-6 text-center">
-          <Badge variant="outline" className="border-secondary text-secondary">
-            Client Success Stories
+          <Badge
+            variant="outline"
+            className="border-blue-600 bg-blue-50 text-blue-700"
+          >
+            Proven Results
           </Badge>
-          <h2 className="text-3xl font-semibold text-balance md:text-4xl lg:text-5xl">
-            <span className="text-ink-black">
-              Transforming Businesses with AI
-            </span>
+          <h2 className="text-3xl font-semibold text-balance text-gray-900 md:text-4xl lg:text-5xl">
+            Transforming businesses with measurable impact
           </h2>
-          <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-slate-600">
-            Real results from Fortune 500 companies that trusted us to lead
-            their AI transformation. Discover how we&apos;ve generated billions
-            in value across industries.
+          <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-gray-600">
+            Real results from Fortune 500 companies who partnered with us for AI
+            transformation. See how we&apos;ve delivered billions in value
+            across industries.
           </p>
         </div>
 
         {/* Featured Case Studies */}
-        <div
-          className="mb-12 grid gap-8 lg:grid-cols-2"
-          style={{ marginTop: 'var(--layout-content)' }}
-        >
+        <div className="mt-16 mb-12 grid gap-8 lg:grid-cols-2">
           {featuredCases.map(caseStudy => (
             <Card
               key={caseStudy.id}
-              variant="elevated"
-              hover="lift"
-              className="group component-card relative h-full overflow-hidden"
+              className="border border-gray-200 bg-white p-6 transition-all duration-300 hover:shadow-lg"
             >
-              {/* Gradient Background */}
-              <div
-                className={cn(
-                  'absolute inset-0 bg-gradient-to-br opacity-5 transition-opacity group-hover:opacity-10',
-                  caseStudy.color
-                )}
-              />
-
-              <CardHeader className="space-y-md">
-                <div className="flex-between">
+              <CardHeader className="space-y-4">
+                <div className="flex items-start justify-between">
                   <div className="text-3xl">{caseStudy.icon}</div>
-                  <Badge variant="outline" size="sm">
+                  <Badge
+                    variant="outline"
+                    className="border-gray-200 bg-gray-50 text-gray-700"
+                  >
                     {caseStudy.industry}
                   </Badge>
                 </div>
-                <div className="space-y-sm">
-                  <CardTitle className="line-clamp-2 text-xl font-semibold">
+                <div className="space-y-3">
+                  <CardTitle className="text-xl font-semibold text-gray-900">
                     {caseStudy.title}
                   </CardTitle>
-                  <CardDescription className="text-sm font-medium text-slate-600">
+                  <CardDescription className="text-sm font-medium text-gray-600">
                     {caseStudy.company}
                   </CardDescription>
+                  <p className="inline-block rounded-full bg-blue-50 px-3 py-1 text-sm text-blue-700">
+                    {caseStudy.impact}
+                  </p>
                 </div>
               </CardHeader>
 
@@ -118,31 +117,31 @@ export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
                 {/* Challenge & Solution */}
                 <div className="space-y-4">
                   <div>
-                    <h4 className="mb-2 text-sm font-medium text-slate-900">
-                      Challenge:
+                    <h4 className="mb-2 text-sm font-semibold text-gray-900">
+                      Challenge
                     </h4>
-                    <p className="text-sm leading-relaxed text-slate-600">
+                    <p className="text-sm leading-relaxed text-gray-600">
                       {caseStudy.challenge}
                     </p>
                   </div>
                   <div>
-                    <h4 className="mb-2 text-sm font-medium text-slate-900">
-                      Solution:
+                    <h4 className="mb-2 text-sm font-semibold text-gray-900">
+                      Solution
                     </h4>
-                    <p className="text-sm leading-relaxed text-slate-600">
+                    <p className="text-sm leading-relaxed text-gray-600">
                       {caseStudy.solution}
                     </p>
                   </div>
                 </div>
 
                 {/* Key Results */}
-                <div className="grid grid-cols-3 gap-4 border-y border-slate-200 py-4">
+                <div className="grid grid-cols-3 gap-4 border-t border-gray-100 pt-4">
                   {Object.entries(caseStudy.results).map(([key, value]) => (
                     <div key={key} className="text-center">
-                      <div className="text-secondary text-lg font-bold">
+                      <div className="text-lg font-bold text-blue-700">
                         {value}
                       </div>
-                      <div className="text-xs text-slate-600 capitalize">
+                      <div className="text-xs text-gray-500 capitalize">
                         {key.replace(/([A-Z])/g, ' $1').toLowerCase()}
                       </div>
                     </div>
@@ -151,25 +150,19 @@ export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
 
                 {/* Technologies */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-slate-900">
-                    Technologies Used:
+                  <h4 className="text-sm font-semibold text-gray-900">
+                    Key Technologies
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {caseStudy.technologies.slice(0, 2).map(tech => (
+                    {caseStudy.technologies.map(tech => (
                       <Badge
                         key={tech}
                         variant="outline"
-                        size="sm"
-                        className="text-xs"
+                        className="border-gray-200 bg-gray-50 text-xs text-gray-700"
                       >
                         {tech}
                       </Badge>
                     ))}
-                    {caseStudy.technologies.length > 2 && (
-                      <Badge variant="outline" size="sm" className="text-xs">
-                        +{caseStudy.technologies.length - 2} more
-                      </Badge>
-                    )}
                   </div>
                 </div>
               </CardContent>
@@ -178,45 +171,42 @@ export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
         </div>
 
         {/* Key Metrics Summary */}
-        <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4">
-          <div className="text-center">
-            <div className="text-secondary text-3xl font-bold">$2.3B</div>
-            <div className="mt-1 text-sm text-slate-600">
-              Total Value Generated
+        <div className="mb-12 rounded-lg bg-gray-50 p-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-700">$2.3B+</div>
+              <div className="mt-1 text-sm text-gray-600">Value Generated</div>
             </div>
-          </div>
-          <div className="text-center">
-            <div className="text-secondary text-3xl font-bold">150+</div>
-            <div className="mt-1 text-sm text-slate-600">Client Projects</div>
-          </div>
-          <div className="text-center">
-            <div className="text-secondary text-3xl font-bold">97%</div>
-            <div className="mt-1 text-sm text-slate-600">
-              Client Satisfaction
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-700">150+</div>
+              <div className="mt-1 text-sm text-gray-600">
+                Enterprise Clients
+              </div>
             </div>
-          </div>
-          <div className="text-center">
-            <div className="text-secondary text-3xl font-bold">6 Months</div>
-            <div className="mt-1 text-sm text-slate-600">Avg. ROI Timeline</div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-700">97%</div>
+              <div className="mt-1 text-sm text-gray-600">Success Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-700">6 Months</div>
+              <div className="mt-1 text-sm text-gray-600">Average ROI</div>
+            </div>
           </div>
         </div>
 
         {/* CTA Section */}
         <div className="text-center">
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-slate-900">
-              Want to see how we can transform your business?
+            <h3 className="text-2xl font-semibold text-gray-900">
+              Ready to achieve similar results?
             </h3>
-            <p className="mx-auto max-w-2xl text-slate-600">
-              Explore our complete portfolio of client success stories across
-              industries and use cases.
+            <p className="mx-auto max-w-2xl text-gray-600">
+              Discover how we can help your organization unlock value through
+              strategic AI implementation.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/our-work">
-                <Button
-                  variant="gradient"
-                  className="component-button shadow-lg"
-                >
+                <Button variant="primary" className="font-semibold">
                   View All Case Studies
                   <svg
                     className="ml-2 h-4 w-4"
@@ -234,7 +224,7 @@ export function CaseStudiesTeaser({ className }: CaseStudiesTeaserProps) {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="component-button">
+                <Button variant="secondary" className="font-semibold">
                   Discuss Your Project
                 </Button>
               </Link>

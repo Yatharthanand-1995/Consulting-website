@@ -2,51 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import {
-  Button,
-  Badge,
-  AILoader,
-  AITechnologyVisualization,
-} from '@/components/ui';
+import { Button, Badge } from '@/components/ui';
 
 export interface HeroProps {
   className?: string;
 }
-
-// Typewriter effect hook
-function useTypewriter(text: string, speed: number = 100) {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, speed);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, text, speed]);
-
-  return displayText;
-}
-
-// Animated metrics data
-const metrics = [
-  { label: 'AI Models Deployed', value: '500+', icon: '🤖' },
-  { label: 'Client Retention', value: '97%', icon: '📈' },
-  { label: 'Value Generated', value: '$2.3B', icon: '💰' },
-  { label: 'Fortune 500 Clients', value: '150+', icon: '🏢' },
-];
-
-const floatingElements = [
-  { id: 1, delay: 0, x: 10, y: 20 },
-  { id: 2, delay: 2, x: 80, y: 10 },
-  { id: 3, delay: 4, x: 60, y: 80 },
-  { id: 4, delay: 1, x: 20, y: 70 },
-  { id: 5, delay: 3, x: 90, y: 60 },
-];
 
 export function Hero({ className }: HeroProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -123,8 +83,8 @@ export function Hero({ className }: HeroProps) {
                   : 'translate-y-4 opacity-0'
               )}
             >
-              <div className="mx-auto max-w-2xl md:mx-0">
-                <p className="text-xl leading-relaxed text-gray-600">
+              <div className="mx-auto md:mx-0">
+                <p className="hero-subtitle text-xl leading-relaxed text-gray-600">
                   We help Fortune 500 companies implement AI solutions that
                   drive{' '}
                   <strong className="text-gray-900">

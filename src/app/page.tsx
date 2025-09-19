@@ -16,7 +16,6 @@ import {
   InsightsTeaser,
   ImpactMetrics,
 } from '@/components/sections';
-import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -33,24 +32,14 @@ export default function Home() {
           <Hero />
         </section>
 
-        {/* Client Trust Section */}
+        {/* Client Trust Section - Clean Professional */}
         <section
-          className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 py-16"
+          className="bg-gray-50 py-16"
           aria-label="Trusted by industry leaders"
         >
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `
-              radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-              radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.3) 1px, transparent 1px)
-            `,
-              backgroundSize: '50px 50px, 60px 60px',
-            }}
-          />
-          <div className="relative z-10 container mx-auto px-6">
+          <div className="container mx-auto px-6">
             <div className="space-y-10 text-center">
-              <p className="text-sm font-medium tracking-wider text-violet-300 uppercase">
+              <p className="text-sm font-semibold tracking-wider text-gray-600 uppercase">
                 Trusted by Fortune 500 Leaders
               </p>
               <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-6">
@@ -85,43 +74,18 @@ export default function Home() {
                     logo: 'RC',
                     color: 'from-cyan-600 to-blue-700',
                   },
-                ].map((client, index) => (
+                ].map(client => (
                   <div
                     key={client.name}
                     className="group flex items-center justify-center"
                   >
-                    <div
-                      className={cn(
-                        'flex h-16 w-16 items-center justify-center rounded-lg border border-violet-300/30 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:border-violet-300/60',
-                        `bg-gradient-to-br ${client.color} opacity-80 group-hover:opacity-100`
-                      )}
-                    >
-                      <span className="text-sm font-bold text-white drop-shadow-lg">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:shadow-md">
+                      <span className="text-sm font-bold text-gray-700">
                         {client.logo}
                       </span>
                     </div>
                   </div>
                 ))}
-              </div>
-              {/* Animated connection lines */}
-              <div className="mt-8 flex items-center justify-center space-x-2 opacity-40">
-                <div className="h-px w-8 animate-pulse bg-gradient-to-r from-transparent via-violet-400 to-transparent" />
-                <div
-                  className="h-1 w-1 animate-pulse rounded-full bg-emerald-400"
-                  style={{ animationDelay: '0.5s' }}
-                />
-                <div
-                  className="h-px w-12 animate-pulse bg-gradient-to-r from-transparent via-purple-400 to-transparent"
-                  style={{ animationDelay: '1s' }}
-                />
-                <div
-                  className="h-1 w-1 animate-pulse rounded-full bg-cyan-400"
-                  style={{ animationDelay: '1.5s' }}
-                />
-                <div
-                  className="h-px w-8 animate-pulse bg-gradient-to-r from-transparent via-indigo-400 to-transparent"
-                  style={{ animationDelay: '2s' }}
-                />
               </div>
             </div>
           </div>
