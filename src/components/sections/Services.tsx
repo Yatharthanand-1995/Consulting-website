@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import {
@@ -161,6 +162,7 @@ const services = [
 export function Services({ className }: ServicesProps) {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const router = useRouter();
 
   return (
     <section className={cn('section-professional', className)}>
@@ -478,6 +480,7 @@ export function Services({ className }: ServicesProps) {
             <Button
               variant="gradient"
               className="component-button group shadow-neural"
+              onClick={() => router.push('/contact')}
             >
               Schedule Free Consultation
               <svg

@@ -111,9 +111,10 @@ export function Footer({ className }: FooterProps) {
           <div className="space-y-lg col-span-24 md:col-span-12 lg:col-span-8">
             <StratexLogo
               size="lg"
-              variant="default"
+              variant="premium"
               animated={true}
               showText={true}
+              className="transition-transform duration-300 hover:scale-105"
             />
 
             <p className="text-muted-foreground text-sm leading-relaxed">

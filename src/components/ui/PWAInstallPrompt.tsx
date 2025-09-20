@@ -14,15 +14,18 @@ export interface PWAInstallPromptProps {
 }
 
 export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
     // Check if app is already installed
-    if (window.matchMedia('(display-mode: standalone)').matches ||
-        (window.navigator as any).standalone) {
+    if (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as { standalone?: boolean }).standalone
+    ) {
       setIsInstalled(true);
       return;
     }
@@ -49,7 +52,10 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
       setDeferredPrompt(null);
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+    window.addEventListener(
+      'beforeinstallprompt',
+      handleBeforeInstallPrompt as EventListener
+    );
     window.addEventListener('appinstalled', handleAppInstalled);
 
     // Auto-show prompt after user has been on site for 30 seconds
@@ -60,7 +66,10 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
     }, 30000);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt as EventListener
+      );
       window.removeEventListener('appinstalled', handleAppInstalled);
       clearTimeout(timer);
     };
@@ -89,49 +98,81 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
   const handleDismiss = () => {
     setShowPrompt(false);
     // Don't show again for this session
-    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof sessionStorage !== 'undefined'
+    ) {
       sessionStorage.setItem('pwa-prompt-dismissed', 'true');
     }
   };
 
   // Don't show if already installed or dismissed this session
-  if (isInstalled ||
-      (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined' && sessionStorage.getItem('pwa-prompt-dismissed') === 'true') ||
-      (!deferredPrompt && !isIOS)) {
+  if (
+    isInstalled ||
+    (typeof window !== 'undefined' &&
+      typeof sessionStorage !== 'undefined' &&
+      sessionStorage.getItem('pwa-prompt-dismissed') === 'true') ||
+    (!deferredPrompt && !isIOS)
+  ) {
     return null;
   }
 
   if (isIOS) {
     return (
-      <div className={cn(
-        'fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm',
-        'bg-white border border-gray-200 rounded-lg shadow-lg p-4',
-        'transform transition-all duration-300 ease-out',
-        showPrompt ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
-        className
-      )}>
+      <div
+        className={cn(
+          'fixed right-4 bottom-4 left-4 z-50 mx-auto max-w-sm',
+          'rounded-lg border border-gray-200 bg-white p-4 shadow-lg',
+          'transform transition-all duration-300 ease-out',
+          showPrompt
+            ? 'translate-y-0 opacity-100'
+            : 'translate-y-full opacity-0',
+          className
+        )}
+      >
         <div className="flex items-start space-x-3">
           <div className="text-2xl">📱</div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-900 mb-1">
+          <div className="min-w-0 flex-1">
+            <h3 className="mb-1 text-sm font-semibold text-gray-900">
               Install Stratex AI
             </h3>
-            <p className="text-xs text-gray-600 mb-3">
-              Add to your home screen for quick access and offline functionality.
+            <p className="mb-3 text-xs text-gray-600">
+              Add to your home screen for quick access and offline
+              functionality.
             </p>
-            <div className="text-xs text-gray-500 leading-relaxed">
-              Tap <svg className="inline w-3 h-3 mx-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-              </svg> then "Add to Home Screen"
+            <div className="text-xs leading-relaxed text-gray-500">
+              Tap{' '}
+              <svg
+                className="mx-1 inline h-3 w-3"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>{' '}
+              then &quot;Add to Home Screen&quot;
             </div>
           </div>
           <button
             onClick={handleDismiss}
-            className="text-gray-400 hover:text-gray-600 p-1"
+            className="p-1 text-gray-400 hover:text-gray-600"
             aria-label="Dismiss"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -140,20 +181,22 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
   }
 
   return (
-    <div className={cn(
-      'fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm',
-      'bg-white border border-gray-200 rounded-lg shadow-lg p-4',
-      'transform transition-all duration-300 ease-out',
-      showPrompt ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
-      className
-    )}>
+    <div
+      className={cn(
+        'fixed right-4 bottom-4 left-4 z-50 mx-auto max-w-sm',
+        'rounded-lg border border-gray-200 bg-white p-4 shadow-lg',
+        'transform transition-all duration-300 ease-out',
+        showPrompt ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
+        className
+      )}
+    >
       <div className="flex items-start space-x-3">
         <div className="text-2xl">⚡</div>
-        <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-semibold text-gray-900 mb-1">
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-1 text-sm font-semibold text-gray-900">
             Install Stratex AI App
           </h3>
-          <p className="text-xs text-gray-600 mb-3">
+          <p className="mb-3 text-xs text-gray-600">
             Get instant access with offline support and faster loading.
           </p>
           <div className="flex space-x-2">
@@ -161,7 +204,7 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
               variant="primary"
               size="sm"
               onClick={handleInstallClick}
-              className="text-xs px-3 py-1"
+              className="px-3 py-1 text-xs"
               ripple
             >
               Install
@@ -170,7 +213,7 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
               variant="ghost"
               size="sm"
               onClick={handleDismiss}
-              className="text-xs px-3 py-1"
+              className="px-3 py-1 text-xs"
               ripple
             >
               Later
@@ -179,11 +222,21 @@ export function PWAInstallPrompt({ className }: PWAInstallPromptProps) {
         </div>
         <button
           onClick={handleDismiss}
-          className="text-gray-400 hover:text-gray-600 p-1"
+          className="p-1 text-gray-400 hover:text-gray-600"
           aria-label="Dismiss"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>

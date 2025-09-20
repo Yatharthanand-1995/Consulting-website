@@ -30,7 +30,8 @@ const searchData: SearchResult[] = [
   {
     id: 'ai-strategy',
     title: 'AI Strategy & Implementation',
-    description: 'End-to-end AI transformation strategy with proven methodologies',
+    description:
+      'End-to-end AI transformation strategy with proven methodologies',
     url: '/services#ai-strategy',
     type: 'service',
     category: 'AI Services',
@@ -58,7 +59,8 @@ const searchData: SearchResult[] = [
   {
     id: 'financial-services',
     title: 'Financial Services',
-    description: 'AI-powered solutions for banking, insurance, and investment management',
+    description:
+      'AI-powered solutions for banking, insurance, and investment management',
     url: '/industries#financial-services',
     type: 'industry',
     category: 'Industries',
@@ -67,7 +69,8 @@ const searchData: SearchResult[] = [
   {
     id: 'manufacturing',
     title: 'Manufacturing',
-    description: 'Smart manufacturing and Industry 4.0 transformation solutions',
+    description:
+      'Smart manufacturing and Industry 4.0 transformation solutions',
     url: '/industries#manufacturing',
     type: 'industry',
     category: 'Industries',
@@ -76,7 +79,8 @@ const searchData: SearchResult[] = [
   {
     id: 'healthcare',
     title: 'Healthcare',
-    description: 'AI solutions for patient care, diagnostics, and operational efficiency',
+    description:
+      'AI solutions for patient care, diagnostics, and operational efficiency',
     url: '/industries#healthcare',
     type: 'industry',
     category: 'Industries',
@@ -86,7 +90,8 @@ const searchData: SearchResult[] = [
   {
     id: 'ai-financial-2024',
     title: 'The Future of AI in Financial Services: A 2024 Perspective',
-    description: 'Comprehensive analysis of AI adoption trends across 150+ financial institutions',
+    description:
+      'Comprehensive analysis of AI adoption trends across 150+ financial institutions',
     url: '/our-insights#ai-financial-2024',
     type: 'insight',
     category: 'Insights',
@@ -95,7 +100,8 @@ const searchData: SearchResult[] = [
   {
     id: 'responsible-ai',
     title: 'Building Responsible AI: A Practical Framework',
-    description: 'Step-by-step guide to implementing ethical AI practices in enterprise environments',
+    description:
+      'Step-by-step guide to implementing ethical AI practices in enterprise environments',
     url: '/our-insights#responsible-ai',
     type: 'insight',
     category: 'Insights',
@@ -105,7 +111,8 @@ const searchData: SearchResult[] = [
   {
     id: 'about',
     title: 'About Stratex AI',
-    description: 'Learn about our team, mission, and approach to AI transformation',
+    description:
+      'Learn about our team, mission, and approach to AI transformation',
     url: '/about',
     type: 'page',
     category: 'Company',
@@ -124,10 +131,26 @@ const searchData: SearchResult[] = [
 
 const filterTypes = [
   { value: 'all', label: 'All Results', count: searchData.length },
-  { value: 'service', label: 'Services', count: searchData.filter(item => item.type === 'service').length },
-  { value: 'industry', label: 'Industries', count: searchData.filter(item => item.type === 'industry').length },
-  { value: 'insight', label: 'Insights', count: searchData.filter(item => item.type === 'insight').length },
-  { value: 'page', label: 'Pages', count: searchData.filter(item => item.type === 'page').length },
+  {
+    value: 'service',
+    label: 'Services',
+    count: searchData.filter(item => item.type === 'service').length,
+  },
+  {
+    value: 'industry',
+    label: 'Industries',
+    count: searchData.filter(item => item.type === 'industry').length,
+  },
+  {
+    value: 'insight',
+    label: 'Insights',
+    count: searchData.filter(item => item.type === 'insight').length,
+  },
+  {
+    value: 'page',
+    label: 'Pages',
+    count: searchData.filter(item => item.type === 'page').length,
+  },
 ];
 
 export function SmartSearch({
@@ -173,7 +196,10 @@ export function SmartSearch({
   // Close search when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSelectedIndex(-1);
       }
@@ -187,15 +213,22 @@ export function SmartSearch({
     const normalizedQuery = searchQuery.toLowerCase().trim();
 
     // Filter data based on type filter
-    let filteredData = filter === 'all' ? searchData : searchData.filter(item => item.type === filter);
+    const filteredData =
+      filter === 'all'
+        ? searchData
+        : searchData.filter(item => item.type === filter);
 
     // Search across title, description, and tags
     const searchResults = filteredData
       .map(item => {
         let score = 0;
         const titleMatch = item.title.toLowerCase().includes(normalizedQuery);
-        const descMatch = item.description.toLowerCase().includes(normalizedQuery);
-        const tagMatch = item.tags?.some(tag => tag.toLowerCase().includes(normalizedQuery));
+        const descMatch = item.description
+          .toLowerCase()
+          .includes(normalizedQuery);
+        const tagMatch = item.tags?.some(tag =>
+          tag.toLowerCase().includes(normalizedQuery)
+        );
 
         // Score calculation for relevance
         if (titleMatch) score += 3;
@@ -204,12 +237,13 @@ export function SmartSearch({
 
         // Exact matches get higher scores
         if (item.title.toLowerCase() === normalizedQuery) score += 5;
-        if (item.tags?.some(tag => tag.toLowerCase() === normalizedQuery)) score += 3;
+        if (item.tags?.some(tag => tag.toLowerCase() === normalizedQuery))
+          score += 3;
 
         return { ...item, relevanceScore: score };
       })
       .filter(item => item.relevanceScore! > 0)
-      .sort((a, b) => (b.relevanceScore! - a.relevanceScore!))
+      .sort((a, b) => b.relevanceScore! - a.relevanceScore!)
       .slice(0, maxResults);
 
     setResults(searchResults);
@@ -261,23 +295,35 @@ export function SmartSearch({
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'service': return '🎯';
-      case 'industry': return '🏢';
-      case 'insight': return '💡';
-      case 'case-study': return '📊';
-      case 'page': return '📄';
-      default: return '🔍';
+      case 'service':
+        return '🎯';
+      case 'industry':
+        return '🏢';
+      case 'insight':
+        return '💡';
+      case 'case-study':
+        return '📊';
+      case 'page':
+        return '📄';
+      default:
+        return '🔍';
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'service': return 'text-blue-600 bg-blue-50';
-      case 'industry': return 'text-green-600 bg-green-50';
-      case 'insight': return 'text-purple-600 bg-purple-50';
-      case 'case-study': return 'text-orange-600 bg-orange-50';
-      case 'page': return 'text-gray-600 bg-gray-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'service':
+        return 'text-blue-600 bg-blue-50';
+      case 'industry':
+        return 'text-green-600 bg-green-50';
+      case 'insight':
+        return 'text-purple-600 bg-purple-50';
+      case 'case-study':
+        return 'text-orange-600 bg-orange-50';
+      case 'page':
+        return 'text-gray-600 bg-gray-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
@@ -285,9 +331,9 @@ export function SmartSearch({
     <div ref={searchRef} className={cn('relative', className)}>
       {/* Search Input */}
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <svg
-            className="w-5 h-5 text-gray-400"
+            className="h-5 w-5 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -309,9 +355,9 @@ export function SmartSearch({
           onKeyDown={handleKeyDown}
           onFocus={() => query.length > 0 && setIsOpen(true)}
           className={cn(
-            'w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg',
+            'w-full rounded-lg border border-gray-300 py-3 pr-4 pl-10',
             'bg-white text-gray-900 placeholder-gray-500',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+            'focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none',
             'transition-all duration-200',
             isOpen && 'rounded-b-none border-b-0'
           )}
@@ -320,24 +366,24 @@ export function SmartSearch({
 
         {isLoading && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-            <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
           </div>
         )}
       </div>
 
       {/* Filters */}
       {showFilters && isOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-l border-r border-gray-300 px-4 py-2 z-50">
+        <div className="absolute top-full right-0 left-0 z-50 border-r border-l border-gray-300 bg-white px-4 py-2">
           <div className="flex flex-wrap gap-2">
             {filterTypes.map(filter => (
               <button
                 key={filter.value}
                 onClick={() => setSelectedFilter(filter.value)}
                 className={cn(
-                  'px-3 py-1 text-xs rounded-full border transition-all duration-200',
+                  'rounded-full border px-3 py-1 text-xs transition-all duration-200',
                   selectedFilter === filter.value
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'
+                    ? 'border-blue-600 bg-blue-600 text-white'
+                    : 'border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100'
                 )}
               >
                 {filter.label} ({filter.count})
@@ -349,16 +395,18 @@ export function SmartSearch({
 
       {/* Search Results */}
       {isOpen && results.length > 0 && (
-        <div className={cn(
-          'absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-b-lg shadow-lg z-40 max-h-96 overflow-y-auto',
-          showFilters && 'border-t-0 rounded-t-none'
-        )}>
+        <div
+          className={cn(
+            'absolute top-full right-0 left-0 z-40 max-h-96 overflow-y-auto rounded-b-lg border border-gray-300 bg-white shadow-lg',
+            showFilters && 'rounded-t-none border-t-0'
+          )}
+        >
           {results.map((result, index) => (
             <button
               key={result.id}
               onClick={() => handleResultClick(result)}
               className={cn(
-                'w-full p-4 text-left hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-150',
+                'w-full border-b border-gray-100 p-4 text-left transition-colors duration-150 last:border-b-0 hover:bg-gray-50',
                 selectedIndex === index && 'bg-blue-50'
               )}
             >
@@ -366,27 +414,29 @@ export function SmartSearch({
                 <div className="flex-shrink-0">
                   <span className="text-lg">{getTypeIcon(result.type)}</span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <h3 className="text-sm font-semibold text-gray-900 truncate">
+                <div className="min-w-0 flex-1">
+                  <div className="mb-1 flex items-center space-x-2">
+                    <h3 className="truncate text-sm font-semibold text-gray-900">
                       {result.title}
                     </h3>
-                    <span className={cn(
-                      'px-2 py-0.5 text-xs rounded-full',
-                      getTypeColor(result.type)
-                    )}>
+                    <span
+                      className={cn(
+                        'rounded-full px-2 py-0.5 text-xs',
+                        getTypeColor(result.type)
+                      )}
+                    >
                       {result.category || result.type}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 line-clamp-2">
+                  <p className="line-clamp-2 text-sm text-gray-600">
                     {result.description}
                   </p>
                   {result.tags && (
-                    <div className="flex flex-wrap gap-1 mt-2">
+                    <div className="mt-2 flex flex-wrap gap-1">
                       {result.tags.slice(0, 3).map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600 rounded"
+                          className="rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-600"
                         >
                           {tag}
                         </span>
@@ -399,10 +449,11 @@ export function SmartSearch({
           ))}
 
           {/* Search Footer */}
-          <div className="p-3 bg-gray-50 border-t border-gray-200 text-center">
+          <div className="border-t border-gray-200 bg-gray-50 p-3 text-center">
             <p className="text-xs text-gray-500">
               {results.length} result{results.length !== 1 ? 's' : ''} found
-              {selectedFilter !== 'all' && ` in ${filterTypes.find(f => f.value === selectedFilter)?.label}`}
+              {selectedFilter !== 'all' &&
+                ` in ${filterTypes.find(f => f.value === selectedFilter)?.label}`}
             </p>
           </div>
         </div>
@@ -410,9 +461,14 @@ export function SmartSearch({
 
       {/* No Results */}
       {isOpen && query.length > 0 && results.length === 0 && !isLoading && (
-        <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-b-lg shadow-lg z-40 p-6 text-center">
-          <div className="text-gray-400 mb-2">
-            <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="absolute top-full right-0 left-0 z-40 rounded-b-lg border border-gray-300 bg-white p-6 text-center shadow-lg">
+          <div className="mb-2 text-gray-400">
+            <svg
+              className="mx-auto h-12 w-12"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -421,8 +477,10 @@ export function SmartSearch({
               />
             </svg>
           </div>
-          <h3 className="text-sm font-medium text-gray-900 mb-1">No results found</h3>
-          <p className="text-xs text-gray-500 mb-4">
+          <h3 className="mb-1 text-sm font-medium text-gray-900">
+            No results found
+          </h3>
+          <p className="mb-4 text-xs text-gray-500">
             Try adjusting your search terms or filters
           </p>
           <InteractiveButton

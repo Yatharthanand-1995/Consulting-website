@@ -1,0 +1,26 @@
+# Robots.txt for Stratex AI Consulting Website
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow specific important pages
+Allow: /services
+Allow: /industries
+Allow: /research
+Allow: /our-insights
+Allow: /our-work
+Allow: /about
+Allow: /contact
+Allow: /get-started
+
+# Sitemap location
+Sitemap: https://stratex-ai.com/sitemap.xml
+
+# Crawl-delay for well-behaved bots (optional)
+Crawl-delay: 1

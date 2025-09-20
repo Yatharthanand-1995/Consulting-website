@@ -32,7 +32,7 @@ export default function AboutPage() {
       name: 'Himanshu Chauhan',
       role: 'Chief AI Engineer',
       expertise: 'Enterprise Architecture & AI Infrastructure',
-      background: 'Ex-Amazon Web Services, IIT Bombay MS',
+      background: 'Former Amazon Web Services, IIT Bombay MS',
       image: '/api/placeholder/300/400',
     },
     {
@@ -99,12 +99,17 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-4 text-4xl">{stat.icon}</div>
-                <div className="text-secondary mb-2 text-3xl font-bold lg:text-4xl">
+              <div
+                key={index}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="mb-2 text-4xl">{stat.icon}</div>
+                <div className="text-secondary mb-1 text-3xl font-bold lg:text-4xl">
                   {stat.number}
                 </div>
-                <div className="text-muted-foreground">{stat.label}</div>
+                <div className="text-muted-foreground text-sm">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -175,12 +180,18 @@ export default function AboutPage() {
 
             <div className="grid gap-8 md:grid-cols-2">
               {values.map((value, index) => (
-                <Card key={index} variant="elevated" hover="lift" padding="lg">
-                  <CardHeader>
+                <Card
+                  key={index}
+                  variant="elevated"
+                  hover="lift"
+                  padding="lg"
+                  className="flex h-full flex-col"
+                >
+                  <CardHeader className="flex-shrink-0">
                     <div className="mb-4 text-4xl">{value.icon}</div>
                     <CardTitle className="text-xl">{value.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow">
                     <p className="text-muted-foreground">{value.description}</p>
                   </CardContent>
                 </Card>
@@ -206,21 +217,32 @@ export default function AboutPage() {
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {team.map((member, index) => (
-                <Card key={index} variant="neural" hover="lift" padding="lg">
-                  <CardContent>
-                    <div className="from-secondary/10 to-accent/10 mb-6 flex aspect-[3/4] items-center justify-center rounded-lg bg-gradient-to-br">
+                <Card
+                  key={index}
+                  variant="neural"
+                  hover="lift"
+                  padding="lg"
+                  className="h-full"
+                >
+                  <CardContent
+                    padding="none"
+                    className="flex h-full flex-col p-8"
+                  >
+                    <div className="from-secondary/10 to-accent/10 mb-6 flex h-48 w-full flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br">
                       <div className="text-6xl">👤</div>
                     </div>
-                    <h3 className="mb-2 text-lg font-bold">{member.name}</h3>
-                    <p className="text-secondary mb-2 font-medium">
-                      {member.role}
-                    </p>
-                    <p className="text-muted-foreground mb-3 text-sm">
-                      {member.expertise}
-                    </p>
-                    <p className="text-muted-foreground text-xs">
-                      {member.background}
-                    </p>
+                    <div className="flex flex-grow flex-col">
+                      <h3 className="mb-2 text-lg font-bold">{member.name}</h3>
+                      <p className="text-secondary mb-2 font-medium">
+                        {member.role}
+                      </p>
+                      <p className="text-muted-foreground mb-3 text-sm">
+                        {member.expertise}
+                      </p>
+                      <p className="text-muted-foreground flex-grow text-xs">
+                        {member.background}
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -238,13 +260,13 @@ export default function AboutPage() {
           {
             text: 'Schedule Strategy Session',
             variant: 'primary',
-            size: 'xl'
+            size: 'xl',
           },
           {
             text: 'Download Company Profile',
             variant: 'outline',
-            size: 'xl'
-          }
+            size: 'xl',
+          },
         ]}
       />
 

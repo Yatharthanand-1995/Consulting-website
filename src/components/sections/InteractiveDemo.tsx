@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   Button,
@@ -115,6 +116,7 @@ export function InteractiveDemo({ className }: InteractiveDemoProps) {
   const [userInput, setUserInput] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [showResults, setShowResults] = useState<boolean>(false);
+  const router = useRouter();
   const [animatedMetrics, setAnimatedMetrics] = useState<{
     accuracy?: string;
     processingTime?: string;
@@ -348,7 +350,11 @@ export function InteractiveDemo({ className }: InteractiveDemoProps) {
                           Impressed with the results? Let&apos;s discuss your
                           custom solution.
                         </p>
-                        <Button variant="gradient" size="sm">
+                        <Button
+                          variant="gradient"
+                          size="sm"
+                          onClick={() => router.push('/contact')}
+                        >
                           Schedule Consultation
                         </Button>
                       </div>

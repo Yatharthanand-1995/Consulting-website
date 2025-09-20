@@ -1,6 +1,6 @@
 'use client';
 
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { Header, Footer } from '@/components/layout';
 import {
   Button,
@@ -365,6 +365,7 @@ const servicesData = {
 };
 
 export default function ServicePage({ params }: ServicePageProps) {
+  const router = useRouter();
   const service = servicesData[params.serviceId as keyof typeof servicesData];
 
   if (!service) {
@@ -421,7 +422,11 @@ export default function ServicePage({ params }: ServicePageProps) {
               <Button variant="gradient" size="xl">
                 Get Started Today
               </Button>
-              <Button variant="outline" size="xl">
+              <Button
+                variant="outline"
+                size="xl"
+                onClick={() => router.push('/contact')}
+              >
                 Schedule Consultation
               </Button>
             </div>

@@ -41,23 +41,35 @@ export default function SearchPage() {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'service': return '🎯';
-      case 'industry': return '🏢';
-      case 'insight': return '💡';
-      case 'case-study': return '📊';
-      case 'page': return '📄';
-      default: return '🔍';
+      case 'service':
+        return '🎯';
+      case 'industry':
+        return '🏢';
+      case 'insight':
+        return '💡';
+      case 'case-study':
+        return '📊';
+      case 'page':
+        return '📄';
+      default:
+        return '🔍';
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'service': return 'border-blue-200 bg-blue-50 text-blue-700';
-      case 'industry': return 'border-green-200 bg-green-50 text-green-700';
-      case 'insight': return 'border-purple-200 bg-purple-50 text-purple-700';
-      case 'case-study': return 'border-orange-200 bg-orange-50 text-orange-700';
-      case 'page': return 'border-gray-200 bg-gray-50 text-gray-700';
-      default: return 'border-gray-200 bg-gray-50 text-gray-700';
+      case 'service':
+        return 'border-blue-200 bg-blue-50 text-blue-700';
+      case 'industry':
+        return 'border-green-200 bg-green-50 text-green-700';
+      case 'insight':
+        return 'border-purple-200 bg-purple-50 text-purple-700';
+      case 'case-study':
+        return 'border-orange-200 bg-orange-50 text-orange-700';
+      case 'page':
+        return 'border-gray-200 bg-gray-50 text-gray-700';
+      default:
+        return 'border-gray-200 bg-gray-50 text-gray-700';
     }
   };
 
@@ -69,12 +81,13 @@ export default function SearchPage() {
     { value: 'page', label: 'Pages' },
   ];
 
-  const filteredResults = selectedFilter === 'all'
-    ? results
-    : results.filter(result => result.type === selectedFilter);
+  const filteredResults =
+    selectedFilter === 'all'
+      ? results
+      : results.filter(result => result.type === selectedFilter);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
       <Header />
 
       <main className="flex-1">
@@ -82,21 +95,24 @@ export default function SearchPage() {
         <section className="section-professional critical-section bg-gray-50">
           <div className="container-professional">
             <div className="space-y-8">
-              <div className="text-center space-y-4">
-                <Badge variant="outline" className="border-blue-600 bg-blue-50 text-blue-700">
+              <div className="space-y-4 text-center">
+                <Badge
+                  variant="outline"
+                  className="border-blue-600 bg-blue-50 text-blue-700"
+                >
                   Search Results
                 </Badge>
-                <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
-                  Find exactly what you're looking for
+                <h1 className="text-3xl font-semibold text-gray-900 md:text-4xl">
+                  Find exactly what you&apos;re looking for
                 </h1>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Search across our services, industries, insights, and resources
-                  to discover AI solutions tailored to your needs.
+                <p className="mx-auto max-w-2xl text-lg text-gray-600">
+                  Search across our services, industries, insights, and
+                  resources to discover AI solutions tailored to your needs.
                 </p>
               </div>
 
               {/* Enhanced Search Bar */}
-              <div className="max-w-3xl mx-auto">
+              <div className="mx-auto max-w-3xl">
                 <SmartSearch
                   className="w-full"
                   placeholder="Search services, industries, insights, and more..."
@@ -114,33 +130,39 @@ export default function SearchPage() {
           <section className="section-professional section-optimize">
             <div className="container-professional">
               {/* Results Header */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+              <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                  <h2 className="mb-2 text-2xl font-semibold text-gray-900">
                     {query ? `Search Results for "${query}"` : 'Search Results'}
                   </h2>
                   <p className="text-gray-600">
-                    {filteredResults.length} result{filteredResults.length !== 1 ? 's' : ''} found
-                    {selectedFilter !== 'all' && ` in ${filterTypes.find(f => f.value === selectedFilter)?.label}`}
+                    {filteredResults.length} result
+                    {filteredResults.length !== 1 ? 's' : ''} found
+                    {selectedFilter !== 'all' &&
+                      ` in ${filterTypes.find(f => f.value === selectedFilter)?.label}`}
                   </p>
                 </div>
 
                 {/* Filter Tabs */}
-                <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
+                <div className="mt-4 flex flex-wrap gap-2 md:mt-0">
                   {filterTypes.map(filter => (
                     <button
                       key={filter.value}
                       onClick={() => setSelectedFilter(filter.value)}
                       className={cn(
-                        'px-4 py-2 text-sm rounded-lg border transition-all duration-200',
+                        'rounded-lg border px-4 py-2 text-sm transition-all duration-200',
                         selectedFilter === filter.value
-                          ? 'bg-blue-600 text-white border-blue-600'
-                          : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                          ? 'border-blue-600 bg-blue-600 text-white'
+                          : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
                       )}
                     >
                       {filter.label}
-                      {filter.value === 'all' && results.length > 0 && ` (${results.length})`}
-                      {filter.value !== 'all' && results.filter(r => r.type === filter.value).length > 0 &&
+                      {filter.value === 'all' &&
+                        results.length > 0 &&
+                        ` (${results.length})`}
+                      {filter.value !== 'all' &&
+                        results.filter(r => r.type === filter.value).length >
+                          0 &&
                         ` (${results.filter(r => r.type === filter.value).length})`}
                     </button>
                   ))}
@@ -149,7 +171,7 @@ export default function SearchPage() {
 
               {/* Results Grid */}
               {filteredResults.length > 0 ? (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 stagger-animation">
+                <div className="stagger-animation grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {filteredResults.map((result, index) => (
                     <InteractiveCard
                       key={result.id}
@@ -160,7 +182,9 @@ export default function SearchPage() {
                       <div className="space-y-4">
                         {/* Header */}
                         <div className="flex items-start justify-between">
-                          <div className="text-2xl">{getTypeIcon(result.type)}</div>
+                          <div className="text-2xl">
+                            {getTypeIcon(result.type)}
+                          </div>
                           <Badge
                             variant="outline"
                             className={cn('text-xs', getTypeColor(result.type))}
@@ -171,10 +195,10 @@ export default function SearchPage() {
 
                         {/* Content */}
                         <div className="space-y-3">
-                          <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
+                          <h3 className="line-clamp-2 text-lg font-semibold text-gray-900">
                             {result.title}
                           </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                          <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
                             {result.description}
                           </p>
 
@@ -184,13 +208,13 @@ export default function SearchPage() {
                               {result.tags.slice(0, 3).map((tag, tagIndex) => (
                                 <span
                                   key={tagIndex}
-                                  className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded"
+                                  className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600"
                                 >
                                   {tag}
                                 </span>
                               ))}
                               {result.tags.length > 3 && (
-                                <span className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
+                                <span className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">
                                   +{result.tags.length - 3} more
                                 </span>
                               )}
@@ -215,9 +239,14 @@ export default function SearchPage() {
                 </div>
               ) : (
                 query && (
-                  <div className="text-center py-12">
-                    <div className="text-gray-400 mb-4">
-                      <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="py-12 text-center">
+                    <div className="mb-4 text-gray-400">
+                      <svg
+                        className="mx-auto h-16 w-16"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -226,11 +255,14 @@ export default function SearchPage() {
                         />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
-                    <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                      We couldn't find anything matching "{query}". Try different keywords or browse our services.
+                    <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                      No results found
+                    </h3>
+                    <p className="mx-auto mb-6 max-w-md text-gray-600">
+                      We couldn&apos;t find anything matching &quot;{query}
+                      &quot;. Try different keywords or browse our services.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="flex flex-col justify-center gap-4 sm:flex-row">
                       <InteractiveButton
                         variant="primary"
                         onClick={() => setQuery('')}
@@ -257,7 +289,7 @@ export default function SearchPage() {
         {!query && results.length === 0 && (
           <section className="section-professional">
             <div className="container-professional">
-              <div className="text-center space-y-8">
+              <div className="space-y-8 text-center">
                 <h2 className="text-2xl font-semibold text-gray-900">
                   Popular Searches
                 </h2>
@@ -275,7 +307,7 @@ export default function SearchPage() {
                     <button
                       key={index}
                       onClick={() => setQuery(term)}
-                      className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200"
+                      className="rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 transition-colors duration-200 hover:bg-gray-200"
                     >
                       {term}
                     </button>

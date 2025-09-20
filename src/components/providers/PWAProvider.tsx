@@ -10,7 +10,8 @@ export interface PWAProviderProps {
 export function PWAProvider({ children }: PWAProviderProps) {
   const [isOnline, setIsOnline] = useState(true);
   const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
+  const [registration, setRegistration] =
+    useState<ServiceWorkerRegistration | null>(null);
 
   useEffect(() => {
     // Register service worker
@@ -38,7 +39,7 @@ export function PWAProvider({ children }: PWAProviderProps) {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/',
-        updateViaCache: 'none'
+        updateViaCache: 'none',
       });
 
       setRegistration(registration);
@@ -49,7 +50,10 @@ export function PWAProvider({ children }: PWAProviderProps) {
         const newWorker = registration.installing;
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            if (
+              newWorker.state === 'installed' &&
+              navigator.serviceWorker.controller
+            ) {
               // New update available
               setUpdateAvailable(true);
               console.log('New content is available; please refresh.');
@@ -63,7 +67,6 @@ export function PWAProvider({ children }: PWAProviderProps) {
         console.log('New service worker is now controlling the page');
         window.location.reload();
       });
-
     } catch (error) {
       console.error('SW registration failed: ', error);
     }
@@ -84,10 +87,15 @@ export function PWAProvider({ children }: PWAProviderProps) {
 
       {/* Update Available Banner */}
       {updateAvailable && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-600 text-white p-3">
+        <div className="fixed top-0 right-0 left-0 z-50 bg-blue-600 p-3 text-white">
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -95,24 +103,32 @@ export function PWAProvider({ children }: PWAProviderProps) {
                   d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               </svg>
-              <span className="text-sm font-medium">
-                New version available
-              </span>
+              <span className="text-sm font-medium">New version available</span>
             </div>
             <div className="flex items-center space-x-2">
               <button
                 onClick={handleUpdate}
-                className="px-3 py-1 bg-white text-blue-600 rounded text-sm font-medium hover:bg-gray-100 transition-colors"
+                className="rounded bg-white px-3 py-1 text-sm font-medium text-blue-600 transition-colors hover:bg-gray-100"
               >
                 Update
               </button>
               <button
                 onClick={() => setUpdateAvailable(false)}
-                className="text-blue-200 hover:text-white p-1"
+                className="p-1 text-blue-200 hover:text-white"
                 aria-label="Dismiss"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -122,10 +138,10 @@ export function PWAProvider({ children }: PWAProviderProps) {
 
       {/* Offline Indicator */}
       {!isOnline && (
-        <div className="fixed bottom-4 right-4 z-40 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg">
+        <div className="fixed right-4 bottom-4 z-40 rounded-lg bg-gray-900 px-4 py-2 text-white shadow-lg">
           <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium">You're offline</span>
+            <div className="h-2 w-2 animate-pulse rounded-full bg-red-500"></div>
+            <span className="text-sm font-medium">You&apos;re offline</span>
           </div>
         </div>
       )}

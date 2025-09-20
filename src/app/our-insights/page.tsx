@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { Header, Footer } from '@/components/layout';
 import {
   Button,
@@ -140,6 +141,8 @@ const upcomingEvents = [
 ];
 
 export default function OurInsightsPage() {
+  const router = useRouter();
+
   return (
     <div className="bg-background min-h-screen">
       <Header />
@@ -631,7 +634,12 @@ export default function OurInsightsPage() {
                 transformation initiatives.
               </p>
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <Button variant="gradient" size="lg" className="shadow-lg">
+                <Button
+                  variant="gradient"
+                  size="lg"
+                  className="shadow-lg"
+                  onClick={() => router.push('/contact')}
+                >
                   Schedule Expert Consultation
                 </Button>
                 <Button variant="outline" size="lg">

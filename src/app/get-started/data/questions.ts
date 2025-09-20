@@ -1,0 +1,298 @@
+import { AssessmentQuestion } from '../types/assessment';
+
+export const assessmentQuestions: AssessmentQuestion[] = [
+  // AI Strategy & Leadership (25 points)
+  {
+    id: 'strategy-1',
+    categoryId: 'strategy',
+    question:
+      "How clearly defined is your organization's AI strategy and vision?",
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No AI strategy or vision exists',
+      'Basic awareness of AI potential',
+      'High-level strategy in development',
+      'Defined strategy with some specifics',
+      'Comprehensive AI roadmap with clear objectives',
+    ],
+  },
+  {
+    id: 'strategy-2',
+    categoryId: 'strategy',
+    question: 'What level of AI commitment exists at the C-level and board?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No executive awareness or support',
+      'Limited executive understanding',
+      'Some C-level interest and support',
+      'Strong executive sponsorship',
+      'CEO/Board champion driving AI initiative',
+    ],
+  },
+  {
+    id: 'strategy-3',
+    categoryId: 'strategy',
+    question: 'What is your planned AI investment over the next 24 months?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No budget allocated for AI',
+      'Under $100K exploratory budget',
+      '$100K - $500K pilot projects',
+      '$500K - $1M strategic investment',
+      '$1M+ comprehensive transformation',
+    ],
+  },
+  {
+    id: 'strategy-4',
+    categoryId: 'strategy',
+    question: 'How will you measure AI transformation success?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No success metrics defined',
+      'Basic ROI expectations',
+      'Some KPIs identified',
+      'Clear metrics and benchmarks set',
+      'Comprehensive measurement framework',
+    ],
+  },
+  {
+    id: 'strategy-5',
+    categoryId: 'strategy',
+    question:
+      'How would you rate your current digital transformation maturity?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Traditional paper-based processes',
+      'Basic digital tools adoption',
+      'Some process digitization',
+      'Advanced digital capabilities',
+      'Fully digital and data-driven',
+    ],
+  },
+
+  // Data Infrastructure (25 points)
+  {
+    id: 'data-1',
+    categoryId: 'data',
+    question: 'How would you rate your data quality and accessibility?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Poor quality, siloed data',
+      'Some clean data, mostly siloed',
+      'Moderate quality, some integration',
+      'Good quality, well integrated',
+      'High quality, fully accessible',
+    ],
+  },
+  {
+    id: 'data-2',
+    categoryId: 'data',
+    question: 'What data governance frameworks do you have in place?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No data governance',
+      'Basic data policies',
+      'Some governance processes',
+      'Established governance framework',
+      'Mature governance with automation',
+    ],
+  },
+  {
+    id: 'data-3',
+    categoryId: 'data',
+    question: 'What percentage of your infrastructure is cloud-based?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      '0-20% (Mostly on-premise)',
+      '21-40% (Hybrid approach)',
+      '41-60% (Cloud-first strategy)',
+      '61-80% (Mostly cloud)',
+      '81-100% (Cloud-native)',
+    ],
+  },
+  {
+    id: 'data-4',
+    categoryId: 'data',
+    question: 'How robust are your data security and privacy measures?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Basic security measures',
+      'Standard security protocols',
+      'Enhanced security framework',
+      'Advanced security measures',
+      'Enterprise-grade security',
+    ],
+  },
+  {
+    id: 'data-5',
+    categoryId: 'data',
+    question: 'Can you process data in real-time for AI applications?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Batch processing only',
+      'Limited real-time capabilities',
+      'Some real-time processing',
+      'Advanced real-time capabilities',
+      'Full real-time data streaming',
+    ],
+  },
+
+  // Technical Capabilities (20 points)
+  {
+    id: 'technical-1',
+    categoryId: 'technical',
+    question: "What is your organization's AI/ML implementation experience?",
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No AI/ML experience',
+      'Basic experimentation',
+      'Pilot projects completed',
+      'Some production deployments',
+      'Multiple successful AI implementations',
+    ],
+  },
+  {
+    id: 'technical-2',
+    categoryId: 'technical',
+    question:
+      'How easily can new AI tools integrate with your existing systems?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Legacy systems, difficult integration',
+      'Some integration challenges',
+      'Moderate integration capabilities',
+      'Good integration readiness',
+      'API-first, integration-ready architecture',
+    ],
+  },
+  {
+    id: 'technical-3',
+    categoryId: 'technical',
+    question: 'Do you have adequate computing power for AI workloads?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Limited computing resources',
+      'Basic computing capabilities',
+      'Moderate computing power',
+      'Good computing infrastructure',
+      'Scalable, high-performance computing',
+    ],
+  },
+  {
+    id: 'technical-4',
+    categoryId: 'technical',
+    question: 'What internal AI development capabilities do you have?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No internal AI capabilities',
+      'Basic technical understanding',
+      'Some data science skills',
+      'Dedicated AI team members',
+      'Full AI development team',
+    ],
+  },
+
+  // Organizational Readiness (15 points)
+  {
+    id: 'organizational-1',
+    categoryId: 'organizational',
+    question: "How would you rate your team's AI and data science skills?",
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Significant skills gap',
+      'Basic understanding',
+      'Some skilled individuals',
+      'Good skill coverage',
+      'Strong AI capabilities across teams',
+    ],
+  },
+  {
+    id: 'organizational-2',
+    categoryId: 'organizational',
+    question: 'How effective is your organization at managing change?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Change resistant culture',
+      'Slow to adapt to change',
+      'Moderate change adaptability',
+      'Good change management',
+      'Highly adaptive and change-ready',
+    ],
+  },
+  {
+    id: 'organizational-3',
+    categoryId: 'organizational',
+    question: 'What is your commitment to AI skills training and development?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No training plans',
+      'Basic training considerations',
+      'Some training initiatives',
+      'Structured training program',
+      'Comprehensive AI education strategy',
+    ],
+  },
+
+  // Governance & Ethics (10 points)
+  {
+    id: 'governance-1',
+    categoryId: 'governance',
+    question: 'Do you have AI ethics and bias prevention measures in place?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'No ethics framework',
+      'Basic ethical considerations',
+      'Some bias prevention measures',
+      'Established ethics guidelines',
+      'Comprehensive AI ethics policy',
+    ],
+  },
+  {
+    id: 'governance-2',
+    categoryId: 'governance',
+    question: 'How prepared are you for AI regulatory compliance?',
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Not prepared for compliance',
+      'Basic compliance awareness',
+      'Some compliance measures',
+      'Good compliance readiness',
+      'Fully compliant with regulations',
+    ],
+  },
+
+  // Culture & Innovation (5 points)
+  {
+    id: 'culture-1',
+    categoryId: 'culture',
+    question: "How would you describe your organization's innovation culture?",
+    type: 'multiple-choice',
+    weight: 5,
+    options: [
+      'Risk-averse, traditional approach',
+      'Conservative with limited innovation',
+      'Moderate innovation appetite',
+      'Strong innovation culture',
+      'Innovation-driven organization',
+    ],
+  },
+];

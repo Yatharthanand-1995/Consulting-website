@@ -40,35 +40,54 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset form after success
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        role: '',
-        phone: '',
-        projectType: '',
-        budget: '',
-        timeline: '',
-        message: '',
+    try {
+      // Submit form data to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setIsSubmitted(false);
-    }, 3000);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      console.log('Form submitted successfully:', data.submissionId);
+      setIsSubmitted(true);
+
+      // Reset form after success
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          role: '',
+          phone: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        });
+        setIsSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to submit form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const offices = [
     {
-      city: 'San Francisco',
-      address: '101 California Street\nSuite 2450\nSan Francisco, CA 94111',
-      phone: '+1 (555) 123-4567',
-      email: 'sf@stratex-ai.com',
+      city: 'Noida',
+      address: 'E3 801, Cleo County\nSector 121\nNoida, India',
+      phone: '+91 9717543153',
+      email: 'Yatharth.anand@hotmail.com',
     },
     {
       city: 'New York',
@@ -116,7 +135,10 @@ export default function ContactPage() {
       <section className="from-background via-background to-muted/20 bg-gradient-to-br py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="gradient" className="mb-6">
+            <Badge
+              variant="outline"
+              className="mb-6 border-blue-200 bg-blue-50 text-blue-700"
+            >
               Get In Touch
             </Badge>
             <h1 className="mb-6 text-4xl font-bold lg:text-6xl">

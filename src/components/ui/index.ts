@@ -22,6 +22,14 @@ export * from './AIVisualization';
 export * from './TechDivider';
 export * from './PageHero';
 export * from './CTASection';
+export * from './Newsletter';
+export * from './ErrorBoundary';
+export * from './ArticleMeta';
+export * from './Dropdown';
+export * from './Tooltip';
+export * from './Tabs';
+export * from './DataTable';
+export * from './Testimonials';
 
 // Re-export for convenience
 export { Button } from './Button';
@@ -76,4 +84,23 @@ export { AIVisualization } from './AIVisualization';
 export { TechDivider } from './TechDivider';
 export { PageHero } from './PageHero';
 export { CTASection } from './CTASection';
+export { Newsletter } from './Newsletter';
+export { ErrorBoundary } from './ErrorBoundary';
+export { ArticleMeta } from './ArticleMeta';
 export { Breadcrumb } from './Breadcrumb';
+export {
+  Dropdown,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownLabel,
+} from './Dropdown';
+export { Tooltip } from './Tooltip';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
+export {
+  DataTable,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+} from './DataTable';
+export { Testimonials, ClientLogos } from './Testimonials';

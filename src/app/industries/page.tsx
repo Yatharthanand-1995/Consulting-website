@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Header, Footer } from '@/components/layout';
 import {
   Button,
@@ -15,7 +16,8 @@ const industries = [
   {
     id: 'financial-services',
     title: 'Financial Services',
-    description: 'AI-powered solutions for banking, insurance, and investment management',
+    description:
+      'AI-powered solutions for banking, insurance, and investment management',
     icon: '🏦',
     image: '/img/industries/financial-services.svg',
     challenges: [
@@ -40,7 +42,8 @@ const industries = [
   {
     id: 'manufacturing',
     title: 'Manufacturing',
-    description: 'Smart manufacturing and Industry 4.0 transformation solutions',
+    description:
+      'Smart manufacturing and Industry 4.0 transformation solutions',
     icon: '🏭',
     image: '/img/industries/manufacturing.svg',
     challenges: [
@@ -65,7 +68,8 @@ const industries = [
   {
     id: 'healthcare',
     title: 'Healthcare',
-    description: 'AI solutions for patient care, diagnostics, and operational efficiency',
+    description:
+      'AI solutions for patient care, diagnostics, and operational efficiency',
     icon: '🏥',
     image: '/img/industries/healthcare.svg',
     challenges: [
@@ -166,37 +170,42 @@ const industries = [
 
 export default function IndustriesPage() {
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+  const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
       <Header />
 
       <main className="flex-1">
         {/* Hero Section */}
         <section className="section-professional critical-section">
           <div className="container-professional">
-            <div className="text-center space-y-8">
-              <Badge variant="outline" className="border-blue-600 bg-blue-50 text-blue-700">
+            <div className="space-y-8 text-center">
+              <Badge
+                variant="outline"
+                className="border-blue-600 bg-blue-50 text-blue-700"
+              >
                 Industries We Serve
               </Badge>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-balance">
+              <h1 className="text-4xl font-semibold text-balance md:text-5xl lg:text-6xl">
                 <span className="text-gray-900">
                   Industry-specific AI solutions for{' '}
                 </span>
                 <span className="text-blue-700">every sector</span>
               </h1>
 
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600">
                 Deep industry expertise combined with cutting-edge AI technology
-                to solve your most complex business challenges and drive measurable results.
+                to solve your most complex business challenges and drive
+                measurable results.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <InteractiveButton
                   variant="primary"
                   size="lg"
-                  className="font-semibold pulse-glow"
+                  className="pulse-glow font-semibold"
                   ripple
                   glow
                 >
@@ -205,7 +214,7 @@ export default function IndustriesPage() {
                 <InteractiveButton
                   variant="secondary"
                   size="lg"
-                  className="font-semibold hover-lift"
+                  className="hover-lift font-semibold"
                   ripple
                 >
                   View All Case Studies
@@ -218,17 +227,39 @@ export default function IndustriesPage() {
         {/* Industry Overview Stats */}
         <section className="section-professional bg-gray-50">
           <div className="container-professional">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               {[
-                { value: '165+', label: 'Enterprise Clients', description: 'Across all industries' },
-                { value: '6', label: 'Core Industries', description: 'Deep specialization' },
-                { value: '$2.3B+', label: 'Value Generated', description: 'Measurable business impact' },
-                { value: '97%', label: 'Success Rate', description: 'Project completion' },
+                {
+                  value: '165+',
+                  label: 'Enterprise Clients',
+                  description: 'Across all industries',
+                },
+                {
+                  value: '6',
+                  label: 'Core Industries',
+                  description: 'Deep specialization',
+                },
+                {
+                  value: '$2.3B+',
+                  label: 'Value Generated',
+                  description: 'Measurable business impact',
+                },
+                {
+                  value: '97%',
+                  label: 'Success Rate',
+                  description: 'Project completion',
+                },
               ].map((stat, index) => (
-                <div key={index} className="text-center space-y-2">
-                  <div className="text-3xl font-bold text-blue-700">{stat.value}</div>
-                  <div className="text-sm font-semibold text-gray-900">{stat.label}</div>
-                  <div className="text-xs text-gray-600">{stat.description}</div>
+                <div key={index} className="space-y-2 text-center">
+                  <div className="text-3xl font-bold text-blue-700">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm font-semibold text-gray-900">
+                    {stat.label}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {stat.description}
+                  </div>
                 </div>
               ))}
             </div>
@@ -238,53 +269,70 @@ export default function IndustriesPage() {
         {/* Industries Grid */}
         <section className="section-professional section-optimize">
           <div className="container-professional">
-            <div className="text-center space-y-6 mb-16">
-              <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
+            <div className="mb-16 space-y-6 text-center">
+              <h2 className="text-3xl font-semibold text-gray-900 md:text-4xl">
                 Industry Expertise & Solutions
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="mx-auto max-w-2xl text-lg text-gray-600">
                 Tailored AI solutions that address the unique challenges and
                 opportunities in your specific industry.
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 stagger-animation">
+            <div className="stagger-animation grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {industries.map((industry, index) => (
                 <InteractiveCard
                   key={industry.id}
-                  className="p-0 overflow-hidden"
+                  className="overflow-hidden p-0"
                   tilt
                   lift
-                  onClick={() => setSelectedIndustry(
-                    selectedIndustry === industry.id ? null : industry.id
-                  )}
+                  onClick={() =>
+                    setSelectedIndustry(
+                      selectedIndustry === industry.id ? null : industry.id
+                    )
+                  }
                 >
                   <div className="space-y-0">
                     {/* Industry Image */}
                     <div
                       className={cn(
-                        "relative h-48 border-b border-blue-100 industry-card-header",
-                        industry.id === 'financial-services' && 'industry-gradient-financial',
-                        industry.id === 'manufacturing' && 'industry-gradient-manufacturing',
-                        industry.id === 'healthcare' && 'industry-gradient-healthcare',
+                        'industry-card-header relative h-48 border-b border-blue-100',
+                        industry.id === 'financial-services' &&
+                          'industry-gradient-financial',
+                        industry.id === 'manufacturing' &&
+                          'industry-gradient-manufacturing',
+                        industry.id === 'healthcare' &&
+                          'industry-gradient-healthcare',
                         industry.id === 'retail' && 'industry-gradient-retail',
                         industry.id === 'energy' && 'industry-gradient-energy',
-                        industry.id === 'technology' && 'industry-gradient-technology'
+                        industry.id === 'technology' &&
+                          'industry-gradient-technology'
                       )}
                     >
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl drop-shadow-sm">{industry.icon}</div>
+                        <div className="text-6xl drop-shadow-sm">
+                          {industry.icon}
+                        </div>
                       </div>
                       <div className="absolute top-4 right-4">
-                        <Badge variant="outline" className={cn(
-                          "bg-white/90 shadow-sm",
-                          industry.id === 'financial-services' && "border-blue-200 text-blue-700",
-                          industry.id === 'manufacturing' && "border-cyan-200 text-cyan-700",
-                          industry.id === 'healthcare' && "border-pink-200 text-pink-700",
-                          industry.id === 'retail' && "border-purple-200 text-purple-700",
-                          industry.id === 'energy' && "border-orange-200 text-orange-700",
-                          industry.id === 'technology' && "border-green-200 text-green-700"
-                        )}>
+                        <Badge
+                          variant="outline"
+                          className={cn(
+                            'bg-white/90 shadow-sm',
+                            industry.id === 'financial-services' &&
+                              'border-blue-200 text-blue-700',
+                            industry.id === 'manufacturing' &&
+                              'border-cyan-200 text-cyan-700',
+                            industry.id === 'healthcare' &&
+                              'border-pink-200 text-pink-700',
+                            industry.id === 'retail' &&
+                              'border-purple-200 text-purple-700',
+                            industry.id === 'energy' &&
+                              'border-orange-200 text-orange-700',
+                            industry.id === 'technology' &&
+                              'border-green-200 text-green-700'
+                          )}
+                        >
                           {industry.clientCount}
                         </Badge>
                       </div>
@@ -299,29 +347,33 @@ export default function IndustriesPage() {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 space-y-4">
+                    <div className="space-y-4 p-6">
                       <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        <h3 className="mb-2 text-xl font-semibold text-gray-900">
                           {industry.title}
                         </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                        <p className="text-sm leading-relaxed text-gray-600">
                           {industry.description}
                         </p>
                       </div>
 
                       {/* Key Results */}
-                      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-gray-100">
+                      <div className="grid grid-cols-3 gap-3 border-t border-gray-100 pt-4">
                         <div className="text-center">
                           <div className="text-lg font-bold text-green-700">
                             {industry.results.costReduction}
                           </div>
-                          <div className="text-xs text-gray-500">Cost Reduction</div>
+                          <div className="text-xs text-gray-500">
+                            Cost Reduction
+                          </div>
                         </div>
                         <div className="text-center">
                           <div className="text-lg font-bold text-blue-700">
                             {industry.results.efficiencyGain}
                           </div>
-                          <div className="text-xs text-gray-500">Efficiency Gain</div>
+                          <div className="text-xs text-gray-500">
+                            Efficiency Gain
+                          </div>
                         </div>
                         <div className="text-center">
                           <div className="text-lg font-bold text-purple-700">
@@ -333,38 +385,64 @@ export default function IndustriesPage() {
 
                       {/* Expand indicator */}
                       <div className="flex justify-center pt-2">
-                        <div className={cn(
-                          "w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 transition-transform duration-200",
-                          selectedIndustry === industry.id && "rotate-180"
-                        )}>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        <div
+                          className={cn(
+                            'flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-400 transition-transform duration-200',
+                            selectedIndustry === industry.id && 'rotate-180'
+                          )}
+                        >
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
                           </svg>
                         </div>
                       </div>
 
                       {/* Expanded Content */}
                       {selectedIndustry === industry.id && (
-                        <div className="pt-4 border-t border-gray-100 space-y-4 animate-fadeInUp">
+                        <div className="animate-fadeInUp space-y-4 border-t border-gray-100 pt-4">
                           <div>
-                            <h4 className="font-semibold text-gray-900 mb-2">Key Challenges</h4>
+                            <h4 className="mb-2 font-semibold text-gray-900">
+                              Key Challenges
+                            </h4>
                             <ul className="space-y-1">
                               {industry.challenges.map((challenge, i) => (
-                                <li key={i} className="flex items-start space-x-2">
-                                  <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0" />
-                                  <span className="text-sm text-gray-600">{challenge}</span>
+                                <li
+                                  key={i}
+                                  className="flex items-start space-x-2"
+                                >
+                                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-500" />
+                                  <span className="text-sm text-gray-600">
+                                    {challenge}
+                                  </span>
                                 </li>
                               ))}
                             </ul>
                           </div>
 
                           <div>
-                            <h4 className="font-semibold text-gray-900 mb-2">Our Solutions</h4>
+                            <h4 className="mb-2 font-semibold text-gray-900">
+                              Our Solutions
+                            </h4>
                             <ul className="space-y-1">
                               {industry.solutions.map((solution, i) => (
-                                <li key={i} className="flex items-start space-x-2">
-                                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                                  <span className="text-sm text-gray-600">{solution}</span>
+                                <li
+                                  key={i}
+                                  className="flex items-start space-x-2"
+                                >
+                                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-500" />
+                                  <span className="text-sm text-gray-600">
+                                    {solution}
+                                  </span>
                                 </li>
                               ))}
                             </ul>
@@ -391,27 +469,28 @@ export default function IndustriesPage() {
         {/* CTA Section */}
         <section className="section-professional bg-gradient-to-r from-blue-700 to-blue-800 text-white">
           <div className="container-professional">
-            <div className="text-center space-y-8">
-              <h2 className="text-3xl md:text-4xl font-semibold">
+            <div className="space-y-8 text-center">
+              <h2 className="text-3xl font-semibold md:text-4xl">
                 Ready to transform your industry with AI?
               </h2>
-              <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+              <p className="mx-auto max-w-2xl text-xl text-blue-100">
                 Connect with our industry experts to discuss your specific
                 challenges and explore tailored AI solutions.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <InteractiveButton
                   variant="secondary"
                   size="lg"
-                  className="font-semibold bg-white text-blue-700 hover:bg-gray-50"
+                  className="bg-white font-semibold text-blue-700 hover:bg-gray-50"
                   ripple
+                  onClick={() => router.push('/contact')}
                 >
                   Schedule Industry Consultation
                 </InteractiveButton>
                 <InteractiveButton
                   variant="outline"
                   size="lg"
-                  className="font-semibold border-white text-white hover:bg-white/10"
+                  className="border-white font-semibold text-white hover:bg-white/10"
                   ripple
                 >
                   Download Industry Guide

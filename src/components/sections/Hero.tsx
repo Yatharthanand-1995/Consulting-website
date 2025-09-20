@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Button, Badge, InteractiveButton, AIVisualization } from '@/components/ui';
+import {
+  Button,
+  Badge,
+  InteractiveButton,
+  AIVisualization,
+} from '@/components/ui';
+import { useRouter } from 'next/navigation';
 
 export interface HeroProps {
   className?: string;
@@ -11,6 +17,7 @@ export interface HeroProps {
 export function Hero({ className }: HeroProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [showMetrics, setShowMetrics] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -45,7 +52,7 @@ export function Hero({ className }: HeroProps) {
             {/* Authority Badge - Simplified */}
             <div
               className={cn(
-                'smooth-transition will-change-transform will-change-opacity',
+                'smooth-transition will-change-opacity will-change-transform',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
@@ -62,7 +69,7 @@ export function Hero({ className }: HeroProps) {
             {/* Main Headline - McKinsey Style */}
             <div
               className={cn(
-                'smooth-transition will-change-transform will-change-opacity',
+                'smooth-transition will-change-opacity will-change-transform',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
@@ -109,21 +116,23 @@ export function Hero({ className }: HeroProps) {
               <InteractiveButton
                 variant="primary"
                 size="lg"
-                className="font-semibold pulse-glow"
+                className="pulse-glow font-semibold"
                 aria-label="Schedule consultation call"
                 ripple
                 glow
+                onClick={() => router.push('/contact')}
               >
                 Schedule Consultation
               </InteractiveButton>
               <InteractiveButton
                 variant="secondary"
                 size="lg"
-                className="font-semibold hover-lift"
-                aria-label="View our insights"
+                className="hover-lift font-semibold"
+                aria-label="Get started with AI assessment"
                 ripple
+                onClick={() => router.push('/get-started')}
               >
-                View Our Insights
+                Get Started
               </InteractiveButton>
             </div>
           </div>
@@ -141,11 +150,13 @@ export function Hero({ className }: HeroProps) {
               {/* Floating Label */}
               <div
                 className={cn(
-                  'text-center mb-4 transition-all delay-1000 duration-500',
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  'mb-4 text-center transition-all delay-1000 duration-500',
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0'
                 )}
               >
-                <div className="inline-block bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 border border-blue-200 shadow-sm">
+                <div className="inline-block rounded-full border border-blue-200 bg-white/90 px-4 py-2 shadow-sm backdrop-blur-sm">
                   <span className="text-sm font-medium text-blue-700">
                     AI Intelligence Network
                   </span>

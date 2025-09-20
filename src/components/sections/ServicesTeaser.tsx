@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import {
@@ -58,6 +59,8 @@ const featuredServices = [
 ];
 
 export function ServicesTeaser({ className }: ServicesTeaserProps) {
+  const router = useRouter();
+
   return (
     <section className={cn('section-professional', className)}>
       <div className="container-professional">
@@ -81,7 +84,7 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
 
         {/* Featured Services Grid with Interactive Cards */}
         <div
-          className="mb-12 grid gap-8 lg:grid-cols-3 stagger-animation"
+          className="stagger-animation mb-12 grid gap-8 lg:grid-cols-3"
           style={{ marginTop: 'var(--layout-content)' }}
         >
           {featuredServices.map(service => (
@@ -149,7 +152,12 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/our-work">
-                <InteractiveButton variant="primary" className="font-semibold" ripple glow>
+                <InteractiveButton
+                  variant="primary"
+                  className="font-semibold"
+                  ripple
+                  glow
+                >
                   View All Services
                   <svg
                     className="ml-2 h-4 w-4"
@@ -166,11 +174,14 @@ export function ServicesTeaser({ className }: ServicesTeaserProps) {
                   </svg>
                 </InteractiveButton>
               </Link>
-              <Link href="/contact">
-                <InteractiveButton variant="secondary" className="font-semibold hover-lift" ripple>
-                  Schedule Consultation
-                </InteractiveButton>
-              </Link>
+              <InteractiveButton
+                variant="secondary"
+                className="hover-lift font-semibold"
+                ripple
+                onClick={() => router.push('/contact')}
+              >
+                Schedule Consultation
+              </InteractiveButton>
             </div>
           </div>
         </div>

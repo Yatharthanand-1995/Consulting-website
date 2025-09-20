@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Button, Badge, StratexLogo, SmartSearch } from '@/components/ui';
+import { Button, Badge, StratexLogo } from '@/components/ui';
 import { smoothScrollToElement, navigationSections } from '@/lib/smooth-scroll';
 import type { NavigationItem } from '@/types';
 
@@ -96,6 +96,19 @@ export function Header({
     };
   }, [isMobileMenuOpen]);
 
+  // Prevent body scroll when search modal is open
+  useEffect(() => {
+    if (isSearchOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isSearchOpen]);
+
   // Handle navigation clicks
   const handleNavClick = (href: string, sectionId?: string) => {
     setIsMobileMenuOpen(false);
@@ -133,7 +146,7 @@ export function Header({
   return (
     <header
       className={cn(
-        'z-50 w-full transition-all duration-300',
+        'z-40 w-full transition-all duration-300',
         fixed && 'fixed top-0 right-0 left-0',
         transparent && !isScrolled
           ? 'bg-transparent'
@@ -144,25 +157,25 @@ export function Header({
     >
       <div className="container-professional">
         <div
-          className="flex-between"
+          className="flex items-center justify-between"
           style={{ height: 'var(--layout-header)' }}
         >
           {/* Logo */}
           <div
-            className="flex items-center"
+            className="mr-12 flex flex-shrink-0 items-center"
             onClick={() => handleNavClick('/')}
           >
             <StratexLogo
               size="md"
-              variant="default"
+              variant="contact"
               animated={true}
               showText={true}
-              className="cursor-pointer"
+              className="cursor-pointer transition-transform duration-200 hover:scale-105"
             />
           </div>
 
           {/* Desktop Navigation - McKinsey Style Tabs */}
-          <nav className="hidden items-center space-x-8 lg:flex">
+          <nav className="hidden flex-1 items-center justify-center space-x-8 lg:flex">
             {mainNavigationTabs.map(tab => (
               <button
                 key={tab.href}
@@ -189,15 +202,20 @@ export function Header({
           </nav>
 
           {/* Desktop Actions - Simplified */}
-          <div className="hidden items-center space-x-4 lg:flex">
+          <div className="ml-12 hidden flex-shrink-0 items-center space-x-4 lg:flex">
             {/* Search Button */}
-            <div className="relative group">
+            <div className="group relative">
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center space-x-2 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                className="flex items-center space-x-2 rounded-lg p-2 text-gray-600 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900"
                 aria-label="Search"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -205,20 +223,26 @@ export function Header({
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-                <span className="hidden xl:inline text-sm">Search</span>
-                <kbd className="hidden xl:inline-flex items-center px-1.5 py-0.5 text-xs bg-gray-100 border border-gray-200 rounded">
+                <span className="hidden text-sm xl:inline">Search</span>
+                <kbd className="hidden items-center rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 text-xs xl:inline-flex">
                   ⌘K
                 </kbd>
               </button>
             </div>
 
-            <Button variant="secondary" size="md" className="font-medium">
+            <Button
+              variant="secondary"
+              size="md"
+              className="font-medium"
+              onClick={() => router.push('/contact')}
+            >
               Schedule Consultation
             </Button>
             <Button
               variant="primary"
               size="md"
               className="font-medium shadow-sm"
+              onClick={() => router.push('/get-started')}
             >
               Get Started
             </Button>
@@ -293,14 +317,20 @@ export function Header({
               <Button
                 variant="secondary"
                 className="w-full font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  router.push('/contact');
+                }}
               >
                 Schedule Consultation
               </Button>
               <Button
                 variant="primary"
                 className="w-full font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  router.push('/get-started');
+                }}
               >
                 Get Started
               </Button>
@@ -319,64 +349,108 @@ export function Header({
       )}
 
       {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-[100] overflow-y-auto transition-all duration-300 ${
+          isSearchOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-300 ${
+            isSearchOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsSearchOpen(false)}
+        />
+
+        {/* Modal Content */}
+        <div className="flex min-h-full items-start justify-center p-4 pt-16">
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-            onClick={() => setIsSearchOpen(false)}
-          />
-
-          {/* Modal Content */}
-          <div className="flex min-h-full items-start justify-center p-4 pt-16">
-            <div className="relative w-full max-w-2xl">
-              {/* Search Component */}
-              <div className="rounded-lg bg-white p-6 shadow-xl">
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">
-                    Search Stratex AI
-                  </h2>
-                  <button
-                    onClick={() => setIsSearchOpen(false)}
-                    className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
-                    aria-label="Close search"
+            className={`relative w-full max-w-2xl transition-all duration-300 ${
+              isSearchOpen
+                ? 'translate-y-0 scale-100 opacity-100'
+                : 'translate-y-4 scale-95 opacity-0'
+            }`}
+          >
+            {/* Search Component */}
+            <div className="rounded-lg bg-white p-6 shadow-xl ring-1 ring-black/5">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Search Stratex AI
+                </h2>
+                <button
+                  onClick={() => setIsSearchOpen(false)}
+                  className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                  aria-label="Close search"
+                >
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Simple Search Input */}
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
                 </div>
-
-                <SmartSearch
-                  className="w-full"
+                <input
+                  type="text"
+                  className="block w-full rounded-lg border border-gray-300 bg-white py-3 pr-3 pl-10 text-sm leading-5 placeholder-gray-500 focus:border-blue-500 focus:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   placeholder="Search services, industries, insights, and more..."
-                  showFilters={true}
-                  maxResults={10}
-                  autoFocus={true}
-                  onSearch={(query, results) => {
-                    console.log(`Search: "${query}" returned ${results.length} results`);
-                  }}
+                  autoFocus
                 />
+              </div>
 
-                {/* Search Tips */}
-                <div className="mt-6 text-xs text-gray-500">
-                  <p className="mb-2 font-medium">Search Tips:</p>
-                  <ul className="space-y-1">
-                    <li>• Try "AI strategy" to find strategic consulting services</li>
-                    <li>• Search "healthcare" to see industry-specific solutions</li>
-                    <li>• Use arrow keys to navigate results, Enter to select</li>
-                  </ul>
+              {/* Quick Links */}
+              <div className="mt-6">
+                <p className="mb-3 text-sm font-medium text-gray-900">
+                  Popular Searches
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'AI Strategy',
+                    'Machine Learning',
+                    'Data Analytics',
+                    'Automation',
+                    'Healthcare AI',
+                    'Financial Services',
+                  ].map(term => (
+                    <button
+                      key={term}
+                      className="rounded-full bg-gray-100 px-3 py-1.5 text-xs text-gray-700 transition-colors hover:bg-gray-200"
+                      onClick={() => setIsSearchOpen(false)}
+                    >
+                      {term}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
