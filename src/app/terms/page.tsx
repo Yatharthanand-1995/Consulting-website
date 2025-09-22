@@ -28,9 +28,7 @@ export default function TermsPage() {
       <main className="flex-1">
         <PageHero
           title="Terms of Service"
-          subtitle="Please read these terms carefully before using our services or website"
-          breadcrumbs={breadcrumbItems}
-          variant="simple"
+          description="Please read these terms carefully before using our services or website"
         />
 
         <section className="section-professional">

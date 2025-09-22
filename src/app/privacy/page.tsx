@@ -29,9 +29,7 @@ export default function PrivacyPage() {
       <main className="flex-1">
         <PageHero
           title="Privacy Policy"
-          subtitle="We are committed to protecting your privacy and ensuring the security of your personal information"
-          breadcrumbs={breadcrumbItems}
-          variant="simple"
+          description="We are committed to protecting your privacy and ensuring the security of your personal information"
         />
 
         <section className="section-professional">

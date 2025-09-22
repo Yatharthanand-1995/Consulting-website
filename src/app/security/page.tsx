@@ -30,9 +30,7 @@ export default function SecurityPage() {
       <main className="flex-1">
         <PageHero
           title="Security & Compliance"
-          subtitle="Enterprise-grade security and compliance practices that Fortune 500 companies trust"
-          breadcrumbs={breadcrumbItems}
-          variant="simple"
+          description="Enterprise-grade security and compliance practices that Fortune 500 companies trust"
         />
 
         <section className="section-professional">

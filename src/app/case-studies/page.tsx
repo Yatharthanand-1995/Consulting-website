@@ -370,9 +370,7 @@ export default function CaseStudiesPage() {
       <main className="flex-1">
         <PageHero
           title="Enterprise AI Success Stories"
-          subtitle="Detailed case studies showcasing measurable business impact from our AI transformations"
-          breadcrumbs={breadcrumbItems}
-          variant="simple"
+          description="Detailed case studies showcasing measurable business impact from our AI transformations"
         />
 
         <section className="section-professional">

@@ -47,7 +47,7 @@ export function ResearchPaper({ paper, className }: ResearchPaperProps) {
   const renderContent = (
     content: string,
     references: Citation[]
-  ): JSX.Element => {
+  ): React.ReactElement => {
     // Simple citation replacement - in a real implementation, you'd parse more sophisticated citation formats
     let processedContent = content;
     const citationCounter = 1;

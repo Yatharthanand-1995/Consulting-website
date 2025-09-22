@@ -54,15 +54,15 @@ export default function ContactSubmissionsPage() {
     return new Date(dateString).toLocaleString();
   };
 
-  const getBudgetColor = (budget: string) => {
-    const budgetRanges = {
+  const getBudgetColor = (budget: string): "default" | "secondary" | "ghost" | "outline" | "success" | "gradient" | "neural" | "premium" | "executive" | "warning" | "accent" | "destructive" => {
+    const budgetRanges: Record<string, "default" | "secondary" | "ghost" | "outline" | "success" | "gradient" | "neural" | "premium" | "executive" | "warning" | "accent" | "destructive"> = {
       '50k-100k': 'default',
       '100k-250k': 'secondary',
       '250k-500k': 'gradient',
       '500k-1m': 'success',
       '1m+': 'premium',
     };
-    return budgetRanges[budget as keyof typeof budgetRanges] || 'default';
+    return budgetRanges[budget] || 'default';
   };
 
   if (loading) {

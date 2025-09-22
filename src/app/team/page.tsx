@@ -328,9 +328,7 @@ export default function TeamPage() {
       <main className="flex-1">
         <PageHero
           title="World-Class AI Expertise"
-          subtitle="Meet the team of former Fortune 500 executives and leading AI researchers transforming enterprises"
-          breadcrumbs={breadcrumbItems}
-          variant="simple"
+          description="Meet the team of former Fortune 500 executives and leading AI researchers transforming enterprises"
         />
 
         <section className="section-professional">

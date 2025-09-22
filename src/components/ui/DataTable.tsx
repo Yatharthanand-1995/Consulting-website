@@ -99,7 +99,7 @@ export function DataTable<T = Record<string, unknown>>({
   className,
   loading = false,
   pagination,
-  rowKey = 'id',
+  rowKey = (record: T) => (record as any).id || String(Math.random()),
   onRow,
   emptyText = 'No data available',
   scroll,

@@ -272,8 +272,8 @@ export default function SearchPage() {
                       </InteractiveButton>
                       <InteractiveButton
                         variant="outline"
-                        href="/services"
                         ripple
+                        onClick={() => window.location.href = '/services'}
                       >
                         Browse Services
                       </InteractiveButton>
