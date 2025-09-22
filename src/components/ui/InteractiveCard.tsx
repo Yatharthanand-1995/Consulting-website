@@ -26,7 +26,7 @@ export function InteractiveCard({
 }: InteractiveCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement | HTMLAnchorElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
@@ -80,7 +80,7 @@ export function InteractiveCard({
 
   return (
     <CardComponent
-      ref={cardRef}
+      ref={cardRef as React.RefObject<HTMLElement>}
       className={cn(baseClasses, className)}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
