@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Header, Footer } from '@/components/layout';
 import {
@@ -12,7 +12,7 @@ import {
 import { cn } from '@/lib/utils';
 import type { SearchResult } from '@/components/ui/SmartSearch';
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -273,7 +273,7 @@ export default function SearchPage() {
                       <InteractiveButton
                         variant="outline"
                         ripple
-                        onClick={() => window.location.href = '/services'}
+                        onClick={() => (window.location.href = '/services')}
                       >
                         Browse Services
                       </InteractiveButton>
@@ -321,5 +321,13 @@ export default function SearchPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchPageContent />
+    </Suspense>
   );
 }

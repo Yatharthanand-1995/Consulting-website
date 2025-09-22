@@ -112,7 +112,14 @@ export function Tabs({
   };
 
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab, variant, size }}>
+    <TabsContext.Provider
+      value={{
+        activeTab,
+        setActiveTab,
+        variant: variant || 'default',
+        size: size || 'default',
+      }}
+    >
       <div className={cn('w-full', className)}>{children}</div>
     </TabsContext.Provider>
   );
