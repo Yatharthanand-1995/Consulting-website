@@ -80,7 +80,7 @@ export function InteractiveCard({
 
   return (
     <CardComponent
-      ref={cardRef as React.RefObject<HTMLElement>}
+      ref={cardRef as React.LegacyRef<HTMLDivElement & HTMLAnchorElement>}
       className={cn(baseClasses, className)}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -90,7 +90,7 @@ export function InteractiveCard({
     >
       {/* Glow effect */}
       {glow && isHovered && (
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-blue-400/10 animate-pulse" />
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-blue-400/10" />
       )}
 
       {/* Spotlight effect */}
@@ -104,13 +104,11 @@ export function InteractiveCard({
       )}
 
       {/* Content */}
-      <div className="relative z-10">
-        {children}
-      </div>
+      <div className="relative z-10">{children}</div>
 
       {/* Border gradient animation */}
       {isHovered && glow && (
-        <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-spin-slow">
+        <div className="animate-spin-slow absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 p-[1px]">
           <div className="h-full w-full rounded-lg bg-white" />
         </div>
       )}
